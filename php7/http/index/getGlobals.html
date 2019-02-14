@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport"
+       content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+ <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> 注册用户信息 </title>
+  <style>
+    label{
+      display: inline-block;
+      width:100px;
+    }
+    input[type=text],
+    input[type=password],
+    input[type=submit],
+    input[type=file],
+    button, select{
+      width: 200px;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>注册用户信息[默认方式: get]</h1>
+
+  <form action="globals.php?title=齐国" method="post">
+    <p>
+      <label>用户名：</label>
+      <input type="text" name="username"> </p>
+    <p>
+      <label>密　码：</label>
+      <input type="password" name="pwd"> </p>
+
+    <p>
+      <!--
+          复选框，在命名时，name必须有 []
+          复选框得到值，不是text值，而是value属性,如果中文，会urlencod
+      -->
+      <label>喜欢的旅游</label>
+      <input type="checkbox" name="hobby[]" value="ql"/>骑驴
+      <input type="checkbox" name="hobby[]" value="北京哈"/>北京
+      <input type="checkbox" name="hobby[]" value="tianjing"/>天津
+      <input type="checkbox" name="hobby[]" value="03"/>上海
+    </p>
+
+    <p>
+      <!--
+        单选框命名时，保证 name 属性一样
+        单选框得到值，不是text值，而是value属性,如果中文，会urlencod
+      -->
+      <label>性别：</label>
+      <input type="radio" name="sex" value="female"/>女
+      <input type="radio" name="sex" value="male"/>男
+    </p>
+
+    <p>
+      <!--
+        复选框得到值，不是text值，而是value属性,如果中文，会urlencod
+      -->
+      <label>哪里人：</label>
+      <select name="jiguan">
+        <option value="sichuan">四川</option>
+        <option value="北京">北京</option>
+        <option value="3">和林</option>
+      </select>
+    </p>
+
+    <p>
+      <!--
+        提交了一个文件，得到是文件名称
+      -->
+      <label>上传头像：</label>
+      <input type="file" name="head" >
+    </p>
+
+    <p>
+      <!--
+        提交一个按钮，那么你点击的按钮的 value也会得到
+      -->
+      <label>&nbsp;</label>
+      <input type="submit" value="提交用户信息">
+      <button type="submit">btnsubmit</button>
+      <input type="submit" name="submit" value="tesing3"/>
+    </p>
+  </form>
+
+
+
+</body>
+</html>

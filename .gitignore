@@ -1,0 +1,28 @@
+.DS_Store
+node_modules
+/Class
+/Composer
+/PDO
+/PHP技术点
+/Swoole
+/设计模式
+/php7/demo
+
+# local env files
+.env.local
+.env.*.local
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
+*.mmap
