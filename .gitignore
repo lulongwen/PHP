@@ -6,6 +6,7 @@ node_modules
 /PHP技术点
 /Swoole
 /设计模式
+/Redis
 /php7/demo
 
 # local env files
@@ -26,3 +27,4 @@ yarn-error.log*
 *.sln
 *.sw*
 *.mmap
+*.chm
