@@ -1,0 +1,61 @@
+练习：
+创建一个名称为db1的数据库。
+
+CREATE DATABASE `db1`;
+create database db1;
+
+创建一个使用utf8字符集的db2数据库。
+
+CREATE DATABASE `db2` character set utf8;
+
+创建一个使用utf8字符集，并带校对规则的mydb3数据库
+
+CREATE DATABASE `mydb3` 
+character set utf8 collate utf8_general_ci;
+
+
+/*
+注意：创建表时，要根据需保存的数据创建相应的列，并根据数据的类型定义相应的列类型。
+例：user表 (快速入门案例 ) 
+	id        整形                              
+	name 字符串
+	password 字符串
+	birthday 日期
+
+*/
+
+
+CREATE TABLE `user`(
+ id int not null default 0 comment 'id号',
+ name varchar(32) not null default '' comment '名字',
+ password char(32) not null default '' comment '密码',
+ birthday date comment '生日'
+)charset = utf8 collate=utf8_general_ci engine = MyISAM;
+
+
+/*
+数值类型的基本使用案例
+*/
+
+CREATE TABLE `user2`(
+	name varchar(32) not null default '' comment '用户名',
+	age tinyint unsigned not null default 0 comment '年龄',
+	age1 tinyint not null default 0 comment '年龄'
+)charset = utf8 engine=myisam;
+
+
+
+create table test(
+num1 int, 
+num2 int(4) zerofill, 
+num3 int(4) unsigned zerofill);
+
+
+
+
+CREATE TABLE user100(
+id int not null default 0 comment 'id号',
+name varchar(32) not null default '' comment '名字',
+sal1 float(4,2) not null default 0.0 comment '薪水',
+sal2 decimal(5,2) not null default 0.0 comment '薪水2'
+)charset = utf8 engine =myisam;

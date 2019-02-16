@@ -8,8 +8,10 @@
 # 创建一个 db1 的数据库
 CREATE DATABASE `db1`;
 
+
 # 创建一个 db2的数据库，字符集为 utf8mb4
 CREATE DATABASE `db2` CHARACTER SET 'utf8mb4';
+
 
 # 创建数据库 数据库名，字符集，排序规则
 CREATE DATABASE `db3`
@@ -29,18 +31,22 @@ COLLATE = utf8mb4_general_ci
 ENGINE = InnoDB;
 
 
-
-# 显示所有的数据库
+-- 显示所有的数据库
 SHOW DATABASES;
 
-# 显示创建数据库的语句
-SHOW CREATE DATABASE db_name;
+-- 使用数据库
+USE `db_name`;
 
-# 删除数据库
+
+-- 删除数据库
 DROP DATABASE db_name;
 
-# 如果存在就删除数据库
+-- 如果存在就删除数据库
 DROP DATABASE IF EXISTS db_name;
+
+
+-- 显示数据库创建的语句
+SHOW CREATE DATABASE db_name; 
 
 
 /**
@@ -63,30 +69,28 @@ ALTER DATABASE `db_name` COLLATE 'utf8mb4_general_ci';
 ALTER DATABASE `db_name` CHARSET = 'utf8mb4';
 
 
-/**
-  数据库的备份
-  直接在 CMD里面操作，指令后面不要带分号 ;
+-- 数据库的备份，直接在 CMD里面操作，指令后面不要带分号 ;
 
-  备份一个库
+-- 备份一个库
   CMD > mysqldump -u root -p `db_name` > 备份路径
 
-  备份多个库
-  CMD > mysqldump -u root -p  -B 数据库名1   数据库名2  > 备份路径
-    好处, 把数据库本身也给你备份
 
-  备份数据库下的表
+-- 备份多个库，好处, 把数据库本身也给你备份
+  CMD > mysqldump -u root -p  -B 数据库名1   数据库名2  > 备份路径
+    
+
+-- 备份数据库下的表
   CMD > mysqldump -u root -p  数据库名 表名1 表名2 > 备份绝对路径
 
-  比如 备份 db2
-*/
+  -- 比如 备份 db2
   SET NAMES 'gbk'; -- 可以省略，防止乱码
   CMD > mysqldump -u root -p `db2` > c:/db2.bak
 
-# 备份数据库下的一张表
+-- 备份数据库下的一张表
   CMD > mysqldump -u root -p 'db2' 'users' > c:/db2.users.bak
 
 
-# 备份多个数据库，注意 -B
+-- 备份多个数据库，注意 -B
   CMD > mysqldump -u root -p -B 'db2' 'db3' 'db6' > c:/db2.db3.db6.bak
 
 
