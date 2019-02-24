@@ -1,5 +1,11 @@
 # mysqli 扩展
-- PHP和 mysql数据库之间的一个连接
+  * PHP和 mysql数据库之间的一个连接
+  * new Mysqli() 时的错误，是 Mysql数据库返回的错误，不是PHP返回的错误
+  * 关联数组的好处，数据库改变，数据还是一样，不会影响返回的结果
+        + $mysqli->query(sql)->fetch_assoc();
+  insert , update, delete 返回 true 和 false
+      + select 返回资源集的结果 $res->fetch_assoc();
+
 
 ## mysqli 类
 ```

@@ -1,25 +1,23 @@
 /*
-  `` 反引号用来隔离关键字的，
   mysql 创建数据库时，指定编码很重要，可以避免导入导出带来的乱码问题
     utf8_general_ci 不区分大小写
     utf8_bin 区分大小写
-
+  `` 反引号用来隔离关键字的
+  数据库说到底也是文件，所有数据都是文件
 */
-# 创建一个 db1 的数据库
+-- 创建一个 db1 的数据库
 CREATE DATABASE `db1`;
 
-
-# 创建一个 db2的数据库，字符集为 utf8mb4
+-- 创建一个 db2的数据库，字符集为 utf8mb4
 CREATE DATABASE `db2` CHARACTER SET 'utf8mb4';
 
-
-# 创建数据库 数据库名，字符集，排序规则
+-- 创建数据库 数据库名，字符集，排序规则
 CREATE DATABASE `db3`
   CHARACTER SET 'utf8mb4'
   COLLATE 'utf8mb4_general_ci';
 
 
-# 创建表 表名，字符集，排序规则，引擎
+-- 创建表 表名，字符集，排序规则，引擎
 CREATE TABLE `user` (
 id int not null default 0 comment 'id',
 name varchar(32) not null default '' comment '名字',
@@ -49,13 +47,15 @@ DROP DATABASE IF EXISTS db_name;
 SHOW CREATE DATABASE db_name; 
 
 
-/**
- 查看mysql数据库的链接进程
+/** 查看mysql数据库的链接进程
   当前有多少个客户端连接到我们的mysql dbms 上
   了解当前的mysql运行和使用状态
  */
-SHOW PROCESSLIST;
+show processlist;
 
+-- 查看数据库版本
+  select version();
+  select @@version;
 
 
 
@@ -112,9 +112,9 @@ ALTER DATABASE `db_name` CHARSET = 'utf8mb4';
   SOURCE c:/db2.bak
 
 
-# 恢复某个库的某张表，例如 db2 users
+-- 恢复某个库的某张表，例如 db2 users
   USE 'db2' -- 如果数据库都没有，则请先创建一个库
   SOURCE c:/db2.users.bak
 
-# 恢复多个库，简单
+-- 恢复多个库，简单
   SOURCE c:/db2.db3.db6.bak;

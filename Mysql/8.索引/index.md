@@ -1,0 +1,100 @@
+# index 索引
+* 约束是为了保证表数据的完整性，索引是为了提高查询效率
+
+存储过程
+  数据库中的空间
+  索引二叉树，数据量越大，索引效果越明显
+
+* 索引的分类
+	```
+	primary key 主键就是索引
+	unique 唯一索引
+	index 普通索引
+	full text 全文索引，用于检索 关键字，比如查询文章
+	```
+* 索引用来提升表的查询速度，解决海量数据查询太慢
+	* 原理：针对要查询的字段创建 二叉树
+	* 缺点：占用磁盘空间，对 DML insert delete update有影响
+
+* 细节：
+  - 频繁作为查询条件的字段应该创建索引
+  - 更新非常频繁的字段不适合创建索引，唯一性太差的字段不适合创建索引
+  - 不会出现在 where 子句中的字段不要创建索引
+
+
+## 索引分类
+1. primary key 主键索引
+	一个表中只能有一个主键索引
+  索引列的值，是唯一的，不能为 null
+  ```sql
+    id int primary key -- 创建表时指定索引
+    primary key(id) -- 表最后面指定索引
+    alert table 'tb_name' add primary key(id); -- 创建表后，添加主键索引
+  ```
+
+2. unique 唯一索引
+	一个表中可以有多个 unique 索引
+  在某列创建唯一索引，该列的值不能重复
+  unique 如果没有 not null 约束，可以为 null
+  ```sql
+    name varchar(32) unique
+    unique(name, email) -- 复合索引
+    alter table 'tb_name' add unique(id, email);
+    -- 添加 unique 索引，2个字段是符合索引
+    create unique index 'idx_uni_email' on 'tb_name'(email);
+  ```
+
+
+3. index 普通索引
+	该字段值有重复的情况下，用普通索引
+  一个表中可以有很多个普通索引，用的最多
+  ```sql
+  alter table 'tb_name' add index(name);
+  create index '索引名' on 'tb_name' (字段名);
+  ```
+
+
+4. full text 全文索引
+	match(全文字段, 全文字段) against(关键字);
+  msyql 自带全文索引，在 MyIsam中使用，不支持中文
+  解决方法：
+    [sphinx=>coreseek]
+    mysql 插件 mysqlcft
+  全文索引的2个概念：
+    停止词（针对没有任何含义的关键字，不会建索引）
+    匹配度
+  应用场景：
+    搜索文章，文字
+  ```sql
+  fulltext(name, name) engine = myisam;
+
+  alter table 'tb_name' add fulltext(name);
+
+  create fulltext index '索引名' on 'tb_name'(字段名);
+
+  -- 使用全文索引
+  select * from articles where match(title, body) against('关键字');
+  ```
+
+
+
+## 索引查询
+	```sql
+  show keys from 'tb_name';
+  show index from 'tb_name';
+  show indexes from 'tb_name';
+
+  desc 'tb_name'; -- 简单的索引
+  show create table 'tb_name';
+
+  -- 删除唯一索引
+  drop index '索引名' on 'tb_name';
+
+  -- 删除普通索引
+  alter table 'tb_name' drop index '索引名';
+
+  -- 删除主键索引
+  alter table 'tb_name' drop primary key;
+
+  -- 修改索引，先删除，后创建
+  ```
