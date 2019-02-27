@@ -1,5 +1,8 @@
 # PHP
 	```
+	docsify 文档 https://docsify.js.org/#/zh-cn/
+	https://github.com/docsifyjs/docsify-cli
+	https://www.jianshu.com/p/cb4a90e430f7
 	Redis
 	ElasticSearch
 	High availability 高可用
@@ -19,13 +22,29 @@
       
   搭建自己的框架
 	```
+	
+## [PHP学习路线](PHP7/学习路线.md)
+## [PHP数据类型](PHP7/1.数据类型/数据类型.md)
 
-![PHP知识体系](php.jpeg)
+### 基本数据类型
+### 数组
+### 函数
+
+#### 字符串函数
+#### 日期函数
+
+### Class 类
+### 接口
+
+## OOP面向对象
 
 
 
-## PHP 项目
-1. 留言本项目
+# [PHP高级特性](PHP高级特性/高级特性.md)
+
+
+# PHP 项目
+## 1 留言本项目 Messsage
   一个留言本项目就考核了你的基础知识。
   用你学到的 HTML， CSS，JavaScript 做一个好看又有动态交互的界面。
   再用PHP语法来连接数据库，编写逻辑，操作数据。

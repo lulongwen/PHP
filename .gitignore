@@ -1,24 +1,25 @@
+# 文件夹
 node_modules
-/Class
-/Composer
-/PDO
-/PHP技术点
-/Swoole
-/设计模式
-/Redis
-/php7/demo
-*/pdf
+Composer
+MVC
+Swoole
+PHP技术点
+设计模式
+Redis
+php7/demo
+book
 
 # local env files
 .env.local
 .env.*.local
 
-# Log files
+# Log files 日志文件
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Editor directories and files
+
+# Editor directories and files 根目录和文件
 .DS_Store
 .idea
 .vscode
@@ -29,3 +30,4 @@ yarn-error.log*
 *.sw*
 *.mmap
 *.chm
+*.xmind
