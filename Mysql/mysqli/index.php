@@ -9,11 +9,11 @@
    *  得到一个连接到mysql数据库的链接，代表PHP和 Mysql数据库之间的一个连接
    *
    * @参数：
-   *  host: string localhost 主机
-   *  username: string root 用户名
-   *  passwd: string '' 密码
-   *  dbname: string db2 数据库名字
-   *  port: int 3306 数据库端口
+   *  host: string 主机 localhost
+   *  username: string 用户名 root
+   *  passwd: string 密码 root
+   *  dbname: string  数据库名字 message
+   *  port: int 3306 数据库端口 3306
    *  socket: 一般不用
    */
 
@@ -22,7 +22,7 @@
     'localhost',
     'root',
     'root',
-    'db2', // 数据库名字
+    'message', // 数据库名字
     3306
   );
 
@@ -58,8 +58,7 @@
 
   // 8 关闭链接
   $mysqli->close();
-
-
+  
 ?>
 
 <script>

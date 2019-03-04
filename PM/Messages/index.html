@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-cmn-hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>发布留言</title>
+  <link rel="stylesheet" href="../node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="message.css">
+</head>
+<body>
+<div class="container index">
+  <article class="message is-primary">
+    <div class="message-header">
+      <a href="list.php">查看留言</a>
+      <a href="index.html">发表留言</a>
+    </div>
+  </article>
+  <div class="columns is-desktop">
+    <div class="column is-half is-offset-one-quarter">
+      <h1 class="title">发布留言</h1>
+
+      <form
+        action="front/index.php"
+        method="post"
+        class="form"
+        name="message">
+        <div class="field">
+          <label class="label">姓 名：</label>
+          <p class="control">
+            <input
+              class="input is-success"
+              type="text"
+              name="name"
+              placeholder="怎么称呼您"
+              data-name="姓名">
+          </p>
+          <p class="help is-danger">必须填写姓名</p>
+        </div>
+
+        <div class="field">
+          <label class="label">手机号码:</label>
+          <p class="control">
+            <input
+              class="input is-success"
+              type="number"
+              name="phone"
+              placeholder="您的联系方式">
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label">电子邮件:</label>
+          <p class="control">
+            <input
+              class="input is-success"
+              type="email"
+              name="email"
+              placeholder="您的邮箱地址">
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label">留言主题:</label>
+          <p class="control">
+            <input
+              class="input is-success"
+              type="text"
+              name="title"
+              placeholder="主题不超过10个字">
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="label">留言内容:</label>
+          <p class="control">
+            <textarea
+              class="textarea is-success has-fixed-size"
+              name="content"
+              id=""
+              cols="30"
+              rows="2"
+              placeholder="您的详细需求"></textarea>
+          </p>
+        </div>
+
+        <footer class="field">
+          <button
+            type="submit"
+            class="button is-primary is-fullwidth">提交留言</button>
+        </footer>
+      </form>
+
+      <h2 class="title">留言列表</h2>
+      <div class="box">
+        <article class="media">
+          <figure class="media-left image is-64x64">
+            <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image"></figure>
+          <div class="media-content">
+            <div class="content">
+              <strong>John Smith</strong>
+              <small>@johnsmith</small>
+              <small>31m</small>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.</p>
+            </div>
+            <nav class="level is-mobile">
+              <div class="level-left">
+                <a class="level-item">
+                  <span class="icon is-small">
+                    <i class="fa fa-reply"></i>
+                  </span>
+                </a>
+                <a class="level-item">
+                  <span class="icon is-small">
+                    <i class="fa fa-heart"></i>
+                  </span>
+                </a>
+              </div>
+            </nav>
+            <!-- 评论 -->
+            <article class="media">
+              <figure class="media-left image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image"></figure>
+              <div class="media-content">
+                <div class="content">
+                  <strong>John Smith</strong>
+                  <small>@johnsmith</small>
+                  <small>31m</small>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas.</p>
+                </div>
+                <nav class="level is-mobile">
+                  <div class="level-left">
+                    <a class="level-item">
+                      <span class="icon is-small">
+                        <i class="fa fa-reply"></i>
+                      </span>
+                    </a>
+                    <a class="level-item">
+                      <span class="icon is-small">
+                        <i class="fa fa-heart"></i>
+                      </span>
+                    </a>
+                  </div>
+                </nav>
+              </div>
+            </article>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

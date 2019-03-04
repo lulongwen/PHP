@@ -1,0 +1,54 @@
+.index{
+  .title{
+    padding:2rem 0 1rem 0;
+    border-bottom: 1px solid #eee;
+    // 思源黑体 \u601d\u6e90\u9ed1\u4f53
+    font-family: "Fira Code Medium", "\u601d\u6e90\u9ed1\u4f53";
+    font-size: 1.2rem;
+  }
+
+  .pagination{
+    margin: 0;
+    padding: 1rem 0;
+  }
+
+  .message-body{
+    min-height: 100px;
+    height: auto;
+  }
+}
+
+.message-header {
+  display: block;
+  a {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+.message-foot {
+  padding: 1em 1.5em;
+  font-size: 14px;
+  background: rgba(221, 221, 221, 0.6);
+}
+
+
+.table {
+  width: 100%;
+}
+
+
+.form{
+  margin-bottom: 3rem;
+
+  .field{
+    position: relative;
+    padding-left: 90px;
+  }
+  .label{
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 90px;
+  }
+}
+
