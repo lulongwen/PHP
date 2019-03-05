@@ -78,7 +78,12 @@ select * from table_name limit 0, 3;
 
 
 -- 分页 pagesize * (pagenow - 1) * pagesize
+-- limit 放在最后
   select * from 'emp' limit pagesize * (pagenow - 1) * pagesize;
+
+-- 总条数 + 分页
+select sql_calc_found_rows * from mes_info limit 2,2;
+select found_rows();
 
 
 

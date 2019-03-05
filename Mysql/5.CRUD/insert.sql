@@ -1,4 +1,7 @@
+/**
+  insert 返回的是 true / false
 
+ */
 
 INSERT INTO `tb_name` [column] VALUES();
 insert into 'tb_name' ('val', ...); 值必须对应
