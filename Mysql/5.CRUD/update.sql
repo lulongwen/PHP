@@ -1,8 +1,13 @@
 /* update 更新数据
-  更新数据一般都带限制条件 where，不带 where条件的将修改整个表的字段，这种需求很少
+
+  更新数据一般都带限制条件 where，
+  不带 where条件的将修改整个表的字段，这种需求很少
+
+  update 语法
+  update tb_name set key = value, key1 = value1  where = 条件;
 */
 
-update tables_name set key = value, key1 = value1  where条件;
+
 
 // 如果不写update的 where条件，表的所有记录都修改
 update employee set salary=5000;

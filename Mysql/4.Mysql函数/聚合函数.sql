@@ -1,19 +1,18 @@
-/**
+/** 聚合函数字段相加，一定要考虑空值 null
 
-聚合函数字段相加，一定要考虑空值 null
- */
- SUM() 一列求和
+  SUM() 一列求和
 
   MAX() 返回最大值
 
   MIN() 返回最小值
 
   AVG() 平均值
-  
-  平均值
-  ROUND(AVG(grade, 0))
 
-总条数
+  ROUND(AVG(grade, 0)) 平均值
+ */
+
+
+-- 总条数
 SELECT COUNT(drade) from student;
  count(*) 总数
   count(列名)
@@ -28,8 +27,15 @@ SELECT COUNT(drade) from student;
 
 count 细节
   count(*) & count(列名)的区别
-    count(*) 不会忽略 null空值
-    count(列名) 忽略空值
+  count(*) 不会忽略 null空值
+  count(列名) 忽略空值
+
+  select count(*) as total, (math+chinese+english) as 'score'
+  form 'student'
+  where (math+chinese+english) > 230;
+
+
+
 
   sum() 求和
     多列组合会忽略空值，解决方法 ifnull
@@ -58,10 +64,3 @@ count 细节
       having myavg < 2000;
 
 
-
-
-日期函数
-  current_date()
-  current_time()
-  current_timestamp()
-  now()

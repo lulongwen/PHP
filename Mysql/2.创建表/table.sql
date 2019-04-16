@@ -37,6 +37,7 @@ ENGINE = InnoDB; /* 引擎 */
   CREATE TABLE `employee` AS SELECT * FROM 'worker';
   DESC `tb_name`;
 
+
   # 快速添加，快速复制，然后添加到新表中
   INSERT INTO `employee`  SELECT * FROM `worker`;
   INSERT INTO `employee` VALUES();
@@ -51,17 +52,22 @@ UPDATE `user` SET password=PASSWORD('root') WHERE user='root';
   alter table 旧表名 rename '新表名';
   rename table '旧表名' to '新表名'; 
 
+
 -- 修改表的字符集
   alter table 'tb_name' character set 'utf8mb4';
 
 -- 修改表的校验规则
 
+
 -- 修改表的引擎
+  show engines;
+  alter table 'tb_name' engine = myisam;
 
 
 
 -- 修改字段名
   alter table 'tb_name' change 旧字段名 to 新字段名 数据类型;
+
 
 -- 修改字段的数据类型
   alter table 'tb_name' modify 字段名 数据类型 字段定义;

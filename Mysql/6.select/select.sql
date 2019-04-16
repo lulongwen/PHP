@@ -6,18 +6,34 @@
   子查询
     嵌入在其他 sql语句中的 select语句，也叫嵌套查询
     from 子句中使用子查询，把子查询看做一个临时的表使用，需要定义别名 alias
+    select 'emp.*', 'emp2.name' from emp3;
 
-  合并查询
-    合并多个 select 语句
+    select e1.* from emp e1
+      where e1.sal > select avg(sal)
+      from emp where deptno = e1.deptno;
+
+  合并查询，合并多个 select 语句
+    union 自动去重
+    union all 不去重
 
   内链接
-  外链接
-    左外链接
-    右外链接
-    
-    表的数据去重复
+    inner join ... on
+    select 字段名 from 表名 inner join 表名2 on 条件
+
+外链接
+  左外连接，左侧的表完全显示
+    left join ... on ...
+    select 字段名...  from 表名 left join 表名2 on 条件
+
+  右外连接，右侧的表完全显示
+    right join ... on ...
+    select 字段名... from 表名 right join 表名2 on 条件
+
+  完全外连接，完全显示2个表，没有匹配的记录设置为空
+
+  distinct 表的数据去重复
     先创建一个相同的表
-    distinct
+
 */
 
 // 查询表的所有字段

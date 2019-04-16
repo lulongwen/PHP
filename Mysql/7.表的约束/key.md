@@ -1,28 +1,24 @@
 # table 表的约束
-	* 设计表时，为了保证数据的完整性，符合某种规范
-  * 约束是为了保证表数据的完整性，索引是为了提高查询效率
-	```
-	primary key 主键
-	foreign key 外键
-	unique 唯一
-	not null 不为空
-	check 语法校验
-	auto_increment 自增长
-	
-	主键不能重复，不能为空
-	null 和 '' 的区别
-    ‘’ 有房子但没人住
-    null 10年后的房子，但是要先交钱
-  
-    unique 可以有多个
-    primary key 只能有一个
+
+* 设计表时，为了保证数据的完整性，符合某种规范
+* 约束是为了保证表数据的完整性，索引是为了提高查询效率
+  ```
+  primary key 主键，主键不能重复，不能为空
+  foreign key 外键
     外键子段指向另外一张表，但字段是在本表中的，指向外面
-	```
+    
+  unique 唯一，unique 可以有多个，primary key 只能有一个
+  
+  not null 不为空
+  check 语法校验
+  auto_increment 自增长
+  ```
 
 
 ## 1 primary key 主键
 	定义主键后，该列不能重复，且不能为 null
-  一张表只能有一个主键，可以是复合主键 primary key(id, phone, email)
+  一张表只能有一个主键
+  多个主键，可以是复合主键 primary key(id, phone, email)
   primary key 一般为 整型
 
 
@@ -37,6 +33,7 @@
   外键字段的值必须在主键中出现过，或为 null
   建立主外键关系，数据就有一致性了，随意删除会失败
   外键字段类型要和主键字段的类型一致，长度可以不同，比如都是 int 或 varchar
+  
   不指定外键，多表关联要有程序员自己维护，mysql不会检查数据
 
 
@@ -50,7 +47,9 @@
 
 ## 4 not null 不为空
 	插入数据时，该列必须要有数据
-
+  null 和 '' 的区别
+    '' 有房子但没人住
+    null 10年后的房子，但是要先交钱
 
 
 ## 5 check 语法校验
@@ -58,11 +57,11 @@
 
 
 
-
 ## 6 auto_increment 自增长
 	primary key auto_increment
   自增长字段必须是 整型，默认从 1 开始，修改
     alter table 'tb_name' auto_increment = 123;
+  
   单独使用，必须要有一个唯一值 unique
 
   insert into 'tb_name'(key, key) values(null, 'val')
