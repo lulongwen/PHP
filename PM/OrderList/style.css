@@ -1,0 +1,181 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  margin: 32px 0 0;
+  font-size: 14px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+td {
+  padding: 5px 10px;
+}
+a {
+  text-decoration: none;
+  color: #009688;
+  outline: none;
+}
+input[type=text] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  font-size: inherit;
+  letter-spacing: .8px;
+}
+input[type=text]:focus {
+  border-color: #4169e1;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+h1 {
+  margin: 16px 0;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+:focus { outline: none }
+.w5 { width: 50px }
+.w7 { width: 70px }
+.w8 { width: 80px }
+.w10 { width: 100px }
+.w11 { width: 110px }
+.w12 { width: 120px }
+.w13 { width: 130px }
+.w14 { width: 140px }
+.w16 { width: 160px }
+.w20 { min-width: 200px }
+
+.tac {
+  text-align: center;
+}
+.fz-0 {
+  font-size: 0;
+}
+
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+.require {
+  color: #f00;
+  padding-right: 3px;
+}
+
+.main {
+  width: 90%;
+  margin: 0 auto;
+}
+.btn {
+  display: inline-block;
+  border: none;
+  padding: 7.5px 15px;
+  background: #4169e1;
+  color: #fff;
+  cursor: pointer;
+}
+.error {
+  background-color: #f44336;
+}
+.gray {
+  background-color: #ccc;
+  color: #333;
+}
+.btn.small {
+  padding: 4px 8px;
+}
+.create-btn {
+  margin-bottom: 16px;
+  font-size: 0;
+  text-align: right;
+}
+
+.form > p {
+  position: relative;
+  float: left;
+  width: calc(100% / 3);
+  margin: 0 0 16px 0;
+  padding-left: 110px;
+}
+.form > p label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 102px;
+  padding: 8px 10px;
+  text-align: right;
+}
+
+.pagination {
+  margin: 16px 0;
+  text-align: right;
+}
+.pagination a {
+  padding: 5px 10px;
+}
+
+
+.main header {
+  position: relative;
+}
+.searchbar {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  width: 500px;
+  padding-right: 114px;
+  height: 34px;
+  font-size: 0;
+}
+.searchbar .searchbar-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 114px;
+  height: 34px;
+}
+.searchbar input[type=text] {
+  width: 190px;
+  margin-right: 3px;
+  font-size: 14px;
+}
+
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.mask .modal {
+  position: relative;
+  margin: 56px auto;
+  width: 360px;
+  background: #fff;
+  padding: 16px;
+  min-height: 200px;
+  height: auto;
+}
+.mask h3 {
+  margin-bottom: 32px;
+}
+.mask .close {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+}
