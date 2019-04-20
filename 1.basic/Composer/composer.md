@@ -48,11 +48,15 @@
 composer global require "fxp/composer-asset-plugin:^1.5.2"
 
 Yii2 基础版，最后一个是项目文件夹的名字
-composer create-project --prefer-dist yiisoft/yii2-app-basic shop
+php composer.phar create-project yiisoft/yii2-app-basic yiiBasic
+composer create-project --prefer-dist yiisoft/yii2-app-basic yiiBasic
 
 // Yii2 高级版
 composer create-project --prefer-dist yiisoft/yii2-app-advanced advanced
+php composer.phar create-project yiisoft/yii2-app-advanced advanced
 
+下载新的归档文件
+	并使用新归档文件中的文件替换应用程序中 vendor/ 目录的内容
 
 github token
   0f2fc6cbee180e56f2aaa7b483ebfb69cd9fa8fa
