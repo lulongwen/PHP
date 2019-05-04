@@ -1,5 +1,4 @@
 <?php
-
   /**
    * Class DAOMysqli
    * 开发类：
@@ -121,6 +120,7 @@
         echo '执行失败，SQL语句是： '. $sql;
         die('，错误是：'. $this->_mysqli->error);
       }
+      
       $row = $res->fetch_assoc();
       $res->free();
       return $row;
