@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ajax-weibo</title>
+<link rel="stylesheet" href="960.css">
+<link rel="stylesheet" href="weibo.css">
+</head>
+<body>
+	<div class="gridgs">
+		<div class="grid-8 grid-ml-2">
+			<div class="wrap">
+				<textarea name="" cols="30" rows="10" id="textarea"></textarea>
+			</div>
+			<p class="send-wrap">
+				<span>( Enter键发送 ) </span>
+				<button id="send">发布</button>
+			</p>
+		</div>
+
+		<div class="grid-8 grid-ml-2" id="content">
+			<!-- <section class="reply">
+				<h3>俗话说知己知彼方能百战不殆，来看看这些App界的大牛们2010-2016年度界面设计的进化历程</h3>
+				<time>2016-9-16 17:16:19</time>
+				<span>
+					<button>很好</button>
+					<button>一般</button>
+					<button>删除</button>
+				</span>
+			</section> -->
+		</div>
+	</div>
+<script src="jquery.js"></script>
+<script>
+/*
+1 点击按钮提交输入的内容
+2 按enter键提交输入内容，trigger click
+3 最后输入的内容显示在最上面
+ */
+$(function(){
+
+	var send = $("#send"), // 发送按钮
+		text= $("#textarea"), // 文本域内容
+		content= $("#content"), // 插入内容的 div
+		pageNum= 1; // 页码，默认1
+
+
+	// 1 send click 发送
+	send.off().on("click",function(){
+		// 点击获取 textarea 的value值
+		var val =text.val();
+		/*
+			weibo.php?act=add&content=xxx	添加一条
+			返回：{error:0, id: 新添加内容的ID, time: 添加时间}
+		*/
+		$.ajax({
+			url:"weibo.php",
+			data:{
+				act:"add",
+				content: val
+			},
+			success: function(data){
+				/*
+				console.log(data)
+				{"error": 0, "id": 5, "time": 1474243249}
+					time 是服务器时间，要乘以1000
+				 */
+				// 成功后添加页面内容
+				if( !data.error ){
+					// 调用添加内容函数
+					addContent();
+					// 清空输入框的内容
+					text.val('');
+				}
+			}
+		});
+	});
+
+
+	// 2 ctrl+Enter 发送触发点击事件
+	text.off().on('keydown', function(ev){
+		//console.log(ev)
+		if( ev.which ==13 && ev.ctrlKey ){
+			send.trigger('click');
+		}
+	});
+
+
+	/*
+	4 添加内容函数--创建div，并生成内容
+	打开页面请求数据 
+	weibo.php?act=get&page=1
+	返回：[{id: ID, content: "内容", time: 时间戳, acc: 顶次数, ref: 踩次数}, {...}, ...]
+	 */
+	function addContent(){
+		$.ajax({
+			url:"weibo.php",
+			data:{
+				act:"get",
+				page: pageNum
+			},
+			success: function(data){
+				/*
+				console.log(data)
+					输出的是一个字符串类型的数组，要转成对象
+					JSON.parse();
+					eval( '('+data+')' )
+					(new Function('', 'return'+ data) )();
+				 */
+				var arr = (new Function('', 'return' +data) )();
+				console.log(arr);
+				$.each(arr, function(i,elem){
+					// 调用 createDiv
+					var newDiv = createDiv(elem.content, elem.time);
+					content.append( newDiv );
+				})
+			}
+		});
+	};
+
+
+	// 3 创建Div
+	function createDiv(value, time,id ,acc){
+		var newDiv =$('<section class="reply" data-id=" '+id+' "/>');
+		/*
+		只要遇到服务器时间为1970，就在时间戳后面乘以 *1000
+		 */
+		// 服务器时间
+		var oDate = new Date(time*1000),
+		iY = oDate.getFullYear(),
+		iMou = oDate.getMonth()+1,
+		iDay = oDate.getDate(),
+		iHou = oDate.getHours(),
+		iMiu = oDate.getMinutes(),
+		iSec = oDate.getSeconds();
+		
+		var nowTime = iY+'-'+double(iMou)+'-'+double(iDay)+' '+double(iHou)+':'+double(iMiu)+':'+double(iSec);
+		newDiv.html(`
+				<h3>${value}</h3>
+				<time>${nowTime}</time>
+				<span>
+					<button>${acc}</button>
+					<button>一般</button>
+					<button>删除</button>
+				</span>`);
+		return newDiv;
+	};
+	
+	
+
+	//时间空位补零
+	function double(num){
+		return num <10 ? '0'+num : ''+num;
+	};
+});
+</script>
+</body>
+</html>

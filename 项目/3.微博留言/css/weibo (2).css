@@ -1,0 +1,95 @@
+body {
+    background: #b4daf0 url(bg.jpg) center 0 no-repeat;
+    background-size: cover;
+    background-color: #fff;
+    letter-spacing: .8px;
+}
+
+.gridgs {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* background: rgba(70, 149, 194, 0.3) url(960.gif) 0 0 repeat-y; */
+}
+
+.grid-8 {
+    margin-bottom:20px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 2px;
+}
+.grid-8 + .grid-8{
+    min-height:500px;
+    height:auto;
+}
+
+.wrap {
+    height: 112px;
+    padding: 5px;
+    position: relative;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.15) inset;
+}
+
+.send-wrap {
+    margin:20px 0 0;
+    font-size: 12px;
+    color: #889;
+    text-align: right;
+}
+
+#send {
+    display: inline-block;
+    width:60px;
+    height:30px;
+    padding: 5px 10px;
+    background: #ffc09f;
+    border-radius: 2px;
+    border: 1px solid #fbbd9e;
+    color: #fff;
+
+    font-size: 14px;
+    white-space: nowrap;
+    outline: none;
+    cursor: pointer;
+}
+
+#send:hover {
+    border-colro: #ff9800;
+    background-color: #ff9800;
+    color: #fff;
+}
+
+#textarea {
+    width: 100%;
+    height: 100px;
+    line-height: 18px;
+    border-color: transparent;
+    font-size: 14px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    word-wrap: break-word;
+    outline: none;
+    resize: none;
+}
+
+.reply{
+    margin-bottom: 10px;
+    padding: 10px;
+    background: rgba(204,204,204,0.05);
+}
+.reply h3{
+    margin:10px 0;
+    line-height: 1.2;
+    font-weight:300;
+    font-size:14px;
+    color:#666;
+}
+.reply time{
+    text-align:left;
+    font-size:12px;
+    color:#ccc;
+}
+.reply span{
+    float:right;
+}

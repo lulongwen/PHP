@@ -1,13 +1,9 @@
 # 文件夹
 node_modules
 
-MVC
-Swoole
 PHP技术点
-设计模式
 Redis
-php7/demo
-book
+Book
 
 # local env files
 .env.local
@@ -28,6 +24,4 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
-*.mmap
 *.chm
-*.xmind

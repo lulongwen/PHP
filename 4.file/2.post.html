@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title> 表单的提交 </title>
+</head>
+<body>
+<form action="request.php?ok=鸿运" method="post">
+  你喜欢的旅游:
+  <!--如果是复选框，在命名时，必须有[]-->
+  <!--复选框得到值，不是用户看的，而是value属性,如果中文，会urlencode -->
+  <input type="checkbox" name="hobby[]" value="ql"/>骑驴
+  <input type="checkbox" name="hobby[]" value="北京哈"/>北京
+  <input type="checkbox" name="hobby[]" value="tianjing"/>天津
+  <br/><br>
+
+
+  你的性别:
+  <!--如果是单选框，在命名时，保证名字一样即可-->
+  <!--单选框得到值，不是用户看的，而是value属性,如果中文，会urlencode -->
+  <input type="radio" name="sex" value="female"/>女
+  <input type="radio" name="sex" value="male"/>男
+  <br/><br>
+
+  <!--如果是下选框-->
+  <!--单选框得到值，不是用户看的，而是value属性,如果中文，会urlencode -->
+  你的籍贯:
+  <select name="jiguan">
+    <option value="sichuan">四川</option>
+    <option value="北京">北京</option>
+  </select>
+  <br><br>
+
+
+  你的名字:<input type="text" name="username"><br>
+  你的邮箱:<input type="text" name="email"><br>
+  你的密码:<input type="password" name="pwd"><br>
+  个人介绍:<textarea rows="10" cols="20" name="jieshao"></textarea><br>
+  <!--如果你提交了一个文件，得到是文件名称-->
+  你的头像:<input type="file" name="head"><br>
+
+
+  <!--如果是一个按钮，那么你点击的按钮的value也会得到-->
+  <input type="submit" name="submit" value="tesing1"/>
+  <input type="submit" name="submit" value="tesing2"/>
+  <input type="submit" name="submit" value="tesing3"/>
+  <input type="submit" name="submit" value="tesing4"/>
+  <input type="submit" name="submit" value="tesing5"/>
+</form>
+
+</body>
+</html>
