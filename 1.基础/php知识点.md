@@ -2,15 +2,14 @@
 
 
 ## 预定义超全局数组
+```
+	$_FILE 文件编程
+	$_COOKIE 会话技术
+	$_SEEEION session
+	$_GET
+	$_POST
 
-* $_FILE 文件编程
-* $_COOKIE 会话技术
-* $_SEEEION session
-* $_GET
-* $_POST
-
-
-
+```
 
 ## PHP细节
 ```
@@ -26,9 +25,22 @@
 		array('1' => 5, 'b' => 'ok')
 
 
-	<?= ?>
+	<?= ?> 短标签 等价于 <?php echo ?>
+		短标记只用来输出变量或表达式，不支持 if for foreach
+		在 PHP.INI 里打开短标记 short_open_tag = On
+		<?= 以代替 <? echo
+	<?= $a ?>
+	<?= (表达式) ?>
+	就相当于
+		<?php echo $a?>
+		<?php echo (表达式)?>
+		<?if(...?> 会输出 <!--if(...-->
 
-	<?php ?>
+
+
+	<?php ?> 长标签
+	推荐用长标记，往html中插入输出的时候会用短标记
+
 	写结束符的好处：
 	避免 ?> 后面的不可见字符（多余的空格、换行符）等
 	破坏页面显示，也不会导致 Header already sent 这样的警告信息
