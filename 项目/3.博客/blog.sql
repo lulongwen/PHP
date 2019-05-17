@@ -57,9 +57,9 @@ create table `fans`(
 
 
 ## 4 后台用户表
-create table `user`(
+create table if not exists `user`(
   `id` int(11) not null auto_increment comment '自增 id',
-  `username` varchar(80) not null comment '用户名',
+  `username` varchar(80) not null collate utf8mb4_general_ci comment '用户名',
   `auth_key` varchar(32) not null comment '自动登录 key',
   `password_hash` int(120) not null comment '加密密码',
   `password_reset_token` varchar(120) default null comment '重置密码 token',
@@ -67,13 +67,14 @@ create table `user`(
   `email_validate_token` varchar(255) default null comment '邮箱验证 token',
   `role` smallint(6) not null default '2' comment '角色等级',
   `avatar` varchar(80) default null comment '头像',
+  
   `vip` int(11) default '0' comment 'vip 等级',
   `point` int(11) default '0' comment '积分',
   `status` tinyint(2) not null default '0' comment '状态',
-  `create_at` int(11) not null comment '创建时间',
-  `update_at` int(11) not null comment '更新时间',
+  `created_at` int(11) not null comment '创建时间',
+  `updated_at` int(11) not null comment '更新时间',
   primary key(`id`)
-)engine=innodb auto_increment=1 default charset=utf8mb4 comment='后台用户表';
+)engine=innodb default charset=utf8mb4 collate=utf8mb4_general_ci comment='后台用户表';
 
 
 
@@ -106,12 +107,12 @@ create table `category` (
 
 # 标签表
 create table `tag` (
-  `id` int(11) not null auto increment comment '自增 id',
-  `name` varchar(40) default null comment '标签名称',
-  `frequency` int(11) default '0' comment '关联文章数量, 标签出现的频率',
+  `id` int(11) not null auto_increment comment '自增 id',
+  `name` varchar(40) not null collate utf8mb4_general_ci comment '标签名称',
+  `frequency` int(11) default '1' comment '关联文章数量, 标签出现的频率',
   primary key (`id`),
   unique key `tag_name`(`name`) using btree
-) engine=innoDB auto increment=1 defaut charset=utf8mb4 comment '文章标签表';
+) engine=innoDB auto defaut charset=utf8mb4 collate=utf8mb4_general_ci comment '文章标签表';
 
 
 ## 表的关联, post_tag 文章和标签的关联
@@ -126,12 +127,12 @@ create table `postag`(
 
 
 ## 表的关联, poststatus 文章状态表
-create table `poststatus`(
-  `id` int(`11`),
-  `name` varchar(40),
-  `position` int(11)
+create table if not exists `poststatus`(
+  `id` int(`11`) not null auto_increment comment '',
+  `name` varchar(40) not null collate utf8mb4_general_ci comment '',
+  `position` int(11) not null comment '',
   unique key `tag_name`(`name`) using btree
-)engine=innodb auto_increment=1 default charset=utf8mb4 comment='文章状态表';
+)engine=innodb default charset=utf8mb4 collate=utf8mb4_general_ci comment='文章状态表';
 
 
 ## 表的关联, commentstatus 评论状态表
@@ -146,9 +147,9 @@ create table `commentstatus`(
 
 
 ## migration 数据搬家用的表, 自动创建的
-create table `migration`(
-  `version` varchar(120),
-  `apply_time`: int(11)
+create table if not exists `migration`(
+  `version` varchar(120) not null collate utf8mb4_general_ci,
+  `apply_time` int(11) default null,
 )engine=innodb default charset=utf8mb4 comment='数据搬家用的表';
 
 

@@ -5,6 +5,11 @@ INSERT INTO `adminuser` (`id`, `username`, `nickname`, `password`, `email`, `pro
 (3, 'tutu', '兔兔', '$2y$13$RZ20K81ZdERPDyFq2EM31e6KjmmdNRtGmCC6Fq9NST3hWhcgoPqUy', 'heyx@hotmail.com', 'a testing user', 'pG7TRyTIXlEbcenpi34TzmMYS2zDsMTF', '$2y$13$HtJqGRmc76KIRIwokii8AOQ1XZljXiuWCKUGFnH9vkTnfBpHtqgFu', NULL);
 
 
+-- post
+
+
+
+
 
 -- comment 
 INSERT INTO `comment` (`id`, `content`, `status`, `create_time`, `userid`, `email`, `url`, `post_id`, `remind`) VALUES
@@ -27,3 +32,54 @@ INSERT INTO `comment` (`id`, `content`, `status`, `create_time`, `userid`, `emai
 INSERT INTO `commentstatus` (`id`, `name`, `position`) VALUES
 (1, '待审核', 1),
 (2, '已审核', 2);
+
+
+
+-- tag
+INSERT INTO `tag` (`id`, `name`, `frequency`) VALUES
+(null, 'Yii', 25),
+(null, 'RESTful Web服务', 6),
+(null, 'Yii2', 32),
+(null, 'Gii', 9),
+(null, '查询构建器', 2),
+(null, 'DAO', 8),
+(null, 'GridView', 11),
+(null, 'ListView', 5),
+(null, 'DetailView', 5),
+(null, 'ActiveRecord', 27),
+(null, '安装', 4),
+(null, 'Composer', 4),
+(null, '小部件', 1),
+(null, 'widget', 1),
+(null, '视频教程', 1),
+(null, '教程', 1);
+
+
+
+-- user
+INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
+(null, 'haiyin', 'pG7TRyTIXlEbcenpi34TzmMYS2zDsMTF', '$2y$13$HtJqGRmc76KIRIwokii8AOQ1XZljXiuWCKUGFnH9vkTnfBpHtqgFu', NULL, 'weixi@weixistyle.com', 10, 1462597929, 1477554091),
+(null, 'tutu', 'xqGDBMlylihvNddSQgDkjAdpJwV4d02C', '$2y$13$bJC0vECI9EPLq/kia9CAmOT060fxoT/HopseOnY.C9siZJDOoQguK', NULL, 'mchael@163.com', 10, 1475850924, 1475850924);
+
+
+
+
+-- migration
+INSERT INTO `migration` (`version`, `apply_time`) VALUES
+('m000000_000000_base', 1462597684),
+('m130524_201442_init', 1462597693),
+('m140506_102106_rbac_init', 1465176156);
+
+
+
+
+-- post
+
+
+
+-- poststatus
+INSERT INTO `poststatus` (`id`, `name`, `position`) VALUES
+(1, '草稿', 1),
+(2, '已发布', 2),
+(3, '已归档', 3);
+
