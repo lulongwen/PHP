@@ -19,7 +19,8 @@ create table `post` (
   `created_at` int(11) default null comment '创建时间',
   `updated_at` int(11) default null comment '更新时间',
   primary key(`id`),
-  key  `idx_category_valid`(`category_id`, `is_valid`) using btree
+  index `post_authorId`(`author_id`) using btee,
+  index `poststatus`(`status`) using btree
 ) engine=innoDB auto increment=1 default charset=utf8mb4 comment='文章主表';
 
 
@@ -37,7 +38,9 @@ create table `comment`(
   `created_at` int(11) comment '评论创建日期',
   `updated_at` int(11) comment '修改日期',
   `is_deleted` smallint(2) '是否删除',
-  primary key (`id`)
+  primary key (`id`),
+  index `comment_postId`(`post_id`), index `comment_fansId`(`fans_id`),
+  index `commentstatus`(`status`)
 )engine=myISAM auto_increment=1 default charset=utf8mb4 comment='评论表';
 -- )engine=innodb auto_increment=1 default charset=utf8mb4 comment='评论表';
 
@@ -73,7 +76,10 @@ create table if not exists `user`(
   `status` tinyint(2) not null default '0' comment '状态',
   `created_at` int(11) not null comment '创建时间',
   `updated_at` int(11) not null comment '更新时间',
-  primary key(`id`)
+  primary key(`id`),
+  unique key `username`(`username`),
+  unique key `email`(`email`),
+  unique key `password_reset_token`(`password_reset_token`)
 )engine=innodb default charset=utf8mb4 collate=utf8mb4_general_ci comment='后台用户表';
 
 
@@ -94,6 +100,49 @@ create table `adminuser`(
   primary key(`id`)
 )engine=innodb auto_increment=1 default charset=utf8mb4 comment='管理员表';
 
+
+
+## auth_item
+create table if not exists `auth_item`(
+  `name` varchar(64) not null comment '',
+  `type` init(11) not null comment '',
+  `description` text collate utf8mb4_general_ci comment '',
+  `rule_name` varchar(64) default null comment '',
+  `data` text collate=utf8mb4_general_ci comment '',
+  `created_at` int(11) default null,
+  `updated_at` int(11) default null,
+  primary key(`name`), // 复合主键
+  index `auth_item_rulename`(`rule_name`), `auth_item_type` (`type`) // 索引
+
+) engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '作者表';
+
+
+## auth_item_child
+create table if not exists `auth_item_child`(
+  `parent` varchar(64) not null comment '',
+  `child` varchar(64) not null comment '',
+  primary key(`parent`, `child`),
+  index `child`(`child`)
+) engine=innoDB default charset=utf8mb4 collate utf8mb4_general_ci comment '';
+
+
+-- auth_rules
+create table if not exists `auth_rule`(
+  `name` varchar(64) not null,
+  `data` text,
+  `created_at` int(11) default null,
+  `updated_at` int (11) default null,
+  primary key (`name`)
+)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '';
+
+
+## auth_assignment
+create table if not exists `auth_assignment`(
+  `name` varchar(64) not null collate utf8mb4_general_ci,
+  `user_id` varchar(64) not null,
+  `created_at` init(11) default null,
+  primary key(`name`, `user_id`)
+)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '作者角色分配';
 
 
 # 文章分类表
@@ -131,6 +180,7 @@ create table if not exists `poststatus`(
   `id` int(`11`) not null auto_increment comment '',
   `name` varchar(40) not null collate utf8mb4_general_ci comment '',
   `position` int(11) not null comment '',
+  primary key(`id`),
   unique key `tag_name`(`name`) using btree
 )engine=innodb default charset=utf8mb4 collate=utf8mb4_general_ci comment='文章状态表';
 
@@ -140,7 +190,8 @@ create table `commentstatus`(
   `id` int(`11`) not null auto_increment comment '',
   `name` varchar(40) not null collate utf8mb4_general_ci comment '',
   `position` tinyint(2) not null comment '',
-  unique key `tag_name`(`name`) using btree
+  unique key `tag_name`(`name`) using btree,
+  primary key(`id`)
 )engine=innodb auto_increment=1 default charset=utf8mb4 comment='评论状态表';
 
 
@@ -150,7 +201,60 @@ create table `commentstatus`(
 create table if not exists `migration`(
   `version` varchar(120) not null collate utf8mb4_general_ci,
   `apply_time` int(11) default null,
+  primary key(`version`)
 )engine=innodb default charset=utf8mb4 comment='数据搬家用的表';
+
+
+
+-- 表的外键约束 auth_assignment
+alter table `auth_assignment`
+  add constraint `fk_auth_assignment` foreign key(`item_name`) 
+  references `auth_item`(`name`) 
+    on delete cascade on update cascade;
+
+
+-- auth_item
+alter table `auth_item`
+  add constraint `fk_auth_item` foreign key(`rule_name`)
+  references `auth_rule`(`name`)
+    on delete set null on update cascade;
+
+
+-- auth_item_child
+alter table `auth_item_child`
+  add constraint `fk_auth_item_parent` foreign key(`parent`)
+  references `auth_item`(`name`)
+    on delete cascade on update cascade,
+  add constraint `fk_auth_item_child` foreign key(`child`)
+  references `auth_item`(`name`)
+    on delete cascade on update cascade;
+
+
+-- post fk_ 外键的前缀
+alter table `post`
+  add constraint `fk_post_author` foreign key(`author_id`)
+  references `adminuser`(`id`)
+    on delete cascade,
+  add constraint `fk_post_status` foreign key(`status`)
+  references `poststatus`(`id`)
+    on delete cascade;
+
+
+-- comment
+alter table `comment`
+  add constraint `fk_comment_post` foreign key(`post_id`) 
+  references `post`(`id`)
+    on delete cascade,
+  add constraint `fk_comment_status` foreign key(`status`)
+  references `commentstatus`(`id`)
+    on delete cascade,
+  add constraint `fk_comment_user` foreign key(`user_id`)
+  references `user`(`id`)
+    on delete cascade;
+
+
+# 修改表的自增字段
+-- alter table `comment` modify `id` int(11) not null auto_increment, auto_increment = 99;
 
 
 

@@ -5,9 +5,37 @@ INSERT INTO `adminuser` (`id`, `username`, `nickname`, `password`, `email`, `pro
 (3, 'tutu', '兔兔', '$2y$13$RZ20K81ZdERPDyFq2EM31e6KjmmdNRtGmCC6Fq9NST3hWhcgoPqUy', 'heyx@hotmail.com', 'a testing user', 'pG7TRyTIXlEbcenpi34TzmMYS2zDsMTF', '$2y$13$HtJqGRmc76KIRIwokii8AOQ1XZljXiuWCKUGFnH9vkTnfBpHtqgFu', NULL);
 
 
--- post
+-- auth_item
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('admin', 1, '系统管理员', NULL, NULL, 1465177361, 1465177361),
+('approveComment', 2, '审核评论', NULL, NULL, 1465177361, 1465177361),
+('commentAuditor', 1, '评论审核员', NULL, NULL, 1465177361, 1465177361),
+('createPost', 2, '新增文章', NULL, NULL, 1465177361, 1465177361),
+('deletePost', 2, '删除文章', NULL, NULL, 1465177361, 1465177361),
+('postAdmin', 1, '文章管理员', NULL, NULL, 1465177361, 1465177361),
+('postOperator', 1, '文章操作员', NULL, NULL, 1465177361, 1465177361),
+('updatePost', 2, '修改文章', NULL, NULL, 1465177361, 1465177361);
 
 
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('commentAuditor', 'approveComment'),
+('admin', 'commentAuditor'),
+('postAdmin', 'createPost'),
+('postAdmin', 'deletePost'),
+('postOperator', 'deletePost'),
+('admin', 'postAdmin'),
+('postAdmin', 'updatePost');
+
+
+-- auth_assignment
+INSERT INTO `auth_assignment` (`name`, `user_id`, `created_at`) VALUES
+('admin', '1', 1478063489),
+('commentAuditor', '1', 1478063489),
+('commentAuditor', '4', 1465177361),
+('postAdmin', '1', 1478063489),
+('postAdmin', '2', 1477816632),
+('postOperator', '1', 1478063489),
+('postOperator', '3', 1465177361);
 
 
 
@@ -74,7 +102,14 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 
 
 -- post
+INSERT INTO `post` (`id`, `title`, `content`, `tag`, `status`, `created_at`, `updated_at`, `author_id`) VALUES
+(null, 'Yii2小部件详解', '小部件是在视图中使用的可重用单元，使用面向对象方式创建复杂和可配置用户界面单元。\r\n例如，日期选择器小部件可生成一个精致的允许用户选择日期的日期选择器', 'Yii2,小部件,widget', 2, 1442998314, 1474115205, 3),
+(null, 'Yii2安装 ', '使用Composer安装 Yii，只需执行一条简单的命令就可以安装新的扩展或更新 Yii 了一个应用程序的基本骨架','Yii2,视频教程,教程', 2, 1558334670453, 1558334677653, 2);
 
+INSERT INTO `post` (`id`, `title`, `content`, `tags`, `status`, `create_time`, `update_time`, `author_id`) VALUES
+(null, 'Active Record 详解','AR的生命周期，理解AR的生命周期对于你操作数据库非常重要。生命周期通常都会有些典型的事件存在。对于开发AR的behaviors来说非常有用。</p>\r\n<p>当你li>yii\\db\\ActiveRecord::init(): 会触发一个 yii\\db\\ActiveRecord::EVENT_INIT 事件</li>\r\n</ol><p>当你通过 yii\\db\\ActiveRecord::find() 方法查询数据时，每个AR实例都将有以下生命周期：</p>', 'Yii2,DetailView', 2, 1443001778, 1443001892, 2),
+(null, 'ListView', '<p>yii\\widgets\\ListView 小部件用于显示数据提供者 data provider提供的数据。\r\n每个数据模型用指定的视图文件 yii\\widgets\\ListView:，所以它可以很方便地为最终用户显示信息并同时创建数据管理界面。</p>', 3, 1443002869, 1443002869, 1),
+(null, 'Yii 教程','请用超清模式播放介绍和教程讲解安排', 'Yii2,视频教程,教程', 2, 1445512144, 1479262717, 1);
 
 
 -- poststatus
@@ -82,4 +117,3 @@ INSERT INTO `poststatus` (`id`, `name`, `position`) VALUES
 (1, '草稿', 1),
 (2, '已发布', 2),
 (3, '已归档', 3);
-
