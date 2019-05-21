@@ -51,7 +51,58 @@
 
 	搭建自己的框架
 
+	dll 反编译
+	  * 封装私有函数，不让别人看到代码
+	  * php .dll 动态文件编写
+	  * php .dll 文件反编译
+
+
 ```
 
 
+## PHP词汇
+```
+	MQ Message queue 消息队列
+		* 队列我们可以理解为管道。以管道的方式做消息传递
+		* 高并发系统的核心组件之一
+		* RocketMQ 消息队列
+			* 阿里系下开源的一款分布式、队列模型的消息中间件
+		* ZeroMQ
+			* 号称最快的消息队列系统，专门为高吞吐量/低延迟的场景开发
+			* 在金融界的应用中经常使用，偏重于实时数据通信场景
+
+	使用Redis、RockMQ写一个大并发的、多服务器的秒杀出来
+
+
+
+	PHP的socket、进程、线程、协程等技术
+	cookie和session实现用户登陆、注册
+	GD库，实现个验证码
+		* GD php处理图形的扩展库
+		* 通常用来生成缩略图，对图片加水印，生成汉字验证码
+
+
+
+
+	PSR PHP Standards Recommendation
+		* https://www.jianshu.com/p/b33155c15343
+
+	PHP解决网站大数据大流量与高并发
+		* https://www.cnblogs.com/lazb/articles/5347356.html
+
+
+	大并发架构，学一些NoSQL技术、Swoole技术、keepalived技术等多项不同的技术
+
+	深入学习Yii2 框架，结合前端的知识，写个多品类的商城、写一个OA系统
+
+	Linux服务器的主要了解多服务器的部署，了解软件安装，特别是LAMP和LNMP的环境搭建
+
+
+	全文搜索
+		* ElasticSearch
+  	* coreseek shpinx
+  	* xunsearch 迅搜
+
+
+```
 
