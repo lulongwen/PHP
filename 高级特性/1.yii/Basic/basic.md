@@ -42,7 +42,7 @@ controllers 命名规则
 
 * 继承 ActiveRecord 和 Model 的区别
 	* ActiveRecord 直接关联的数据库的表，并需要 tableName()进行关联
-	* Model 并不直接关联数据表，字段由自己定义
+	* Model 并不直接关联数据表，key由自己定义
 	* ActiveRecord 相对 Model 也集成了需要直接查询的函数等 
 		* 例如数据库有个文章表，我们会选择 ActiveRecord 继承
 		* 当用户登录验证只需要username,password 时，就选择 Model 继承
@@ -101,7 +101,7 @@ controllers 命名规则
 ## Model 模型的表单验证
 * load方法可以直接加载 $_POST等数据 , 而 POST的数据 下标必须跟 Model 的类名一致
 * 例如：Post::load($_POST) 等于加载 $_POST['post']里面的数据
-* load的字段 必须出现在 rules方法的数组中，不然无法直接赋值
+* load的key 必须出现在 rules方法的数组中，不然无法直接赋值
 
 
 ## Request 组件
@@ -116,33 +116,92 @@ controllers 命名规则
 	?>
 ```
 
+
+
 ### Model的 rule验证规则
 * rules 验证规则是在 model调用 validate() 时进行调用的
 * rules 有 22 种验证规则，常用的有
+	* safe  不验证的字段
+	* required 必填的字段
+	* compare 对比验证
+	* double 双精度验
+	* email 邮箱
+	* in 范围值
+	* integer 整数
+	* match 正则
+	* string 字符串
+	* unique 唯一值
+	* captcha 验证码
+
+* 更多验证信息
+	https://www.yiiframework.com/doc/api/2.0/yii-validators-validator
 ```
-	safe  不验证的字段
-	required 必填的字段
-	compare 对比验证
-	double 双精度验
-	email 邮箱
-	in 范围值
-	integer 整数
-	match 正则
-	string 字符串
-	unique 唯一值
-	captcha 验证码
+safe  不验证的key 字段
+	['key', 'key', 'safe'],
+	[['多个key可以是数组', 'key'], 'safe']
+
+required 必填的key 字段
+	['key', 'key', 'required', 'message' => '不能为空'],
+	[['多个key可以是数组', 'key'], 'required', 'message' => '不能为空'],
+
+compare 对比验证
+	['key', 'compare', 'compareValue' => '对比的值', 'message' => '输入不一致'],
+	['key', 'compare', 'compareAttribute' => '对比的属性', 'message' => '输入不一致'],
+
+double 双精度验
+	['key', 'double', 'min' => '最小值', 'max' => '最大值',
+	'tooSamll' => '小于最小值提示', 'tooBig' => '大于最大值提示', message' => '必须是数字'],
+
+email 邮箱
+	['key', 'email', 'message' => '邮箱错误'],
+
+in 范围值
+	['key', 'in', 'range' => '范围值', 'message' => '超出范围'],
+
+integer 整数
+	['key', 'integer', 'message' => '不是整数'],
+
+match 正则
+	['key', 'in', 'pattern' => '/正则/', 'message' => '匹配错误'],
+
+string 字符串
+	['key', 'string', 'min' => '最小长度', 'max' => '最大长度',
+	'tooShort' => '小于最小长度提示信息', 'tooLong' => '超出最大长度提示'],
+
+unique 唯一值
+	['key', 'unique', 'message' => '已经存在'],
+
+captcha 验证码
+	['key', 'captcha', 'captchaAction' => 'login/captcha', 'message' => '验证码'],
 
 ```
-* 自定义函数验证规则
+
+### 自定义函数验证规则
 ```php
-// ['字段','自定函数' , ‘params’ => ‘传入自定义函数 params 的值’]
+// ['key','自定函数' , ‘params’ => ‘传入自定义函数 params 的值’]
 <?php
+//自定义函数 
 public function checkPassword($attribute , $params){
-	//自定义函数 if(empty($this->$attribute)){
-	$this->addError($attribute , ‘不能为空’); }
-}
+	if(empty($this->$attribute)){
+		$this->addError($attribute , '不能为空'); }
+	}
 ?>
 
+```
+
+### Model getError() 获取验证错误
+* validate 验证有错误时，用以下方式捕获错误
+	* getErrors
+	* getFirstError
+	* getFirstErrors
+
+```php
+<?php
+	$model = new Post();
+	if (!$model -> validate()) {
+		print_r($model -> getErrors());
+	}
+?>
 ```
 
 

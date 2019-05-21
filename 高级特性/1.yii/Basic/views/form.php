@@ -1,14 +1,12 @@
 <?php
 	use yii\helpers\Html;
 	
+	/**
+	 * form 必须有 闭合标签 endForm
+	  beginForm('提交的URL', 'post/get', '属性 id，class 等')
+	  Html组件直接生成 HTML标签
+	 */
 ?>
-
-<!--
-form 必须有 闭合标签 endForm
-	beginForm('提交的URL', 'post/get', '属性 id，class 等')
-	
-	Html组件直接生成 HTML标签
--->
 <?= Html::beginForm('', 'post', ['id' => 'form']) ?>
 
 <?= Html::endForm() ?>
