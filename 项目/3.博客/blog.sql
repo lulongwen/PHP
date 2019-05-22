@@ -1,12 +1,12 @@
 /**
 规范
   1 表名不用下划线，尽量简短，所见即所得
+  post 文章核心表
 */
 
-# 1 post 文章核心表
-create table `post` (
-  `id` int(11) not null auto increment comment '自增 id',
-  `title` varchar(120) default null collate utf8mb4_general_ci commment '标题',
+create table if not exists `post` (
+  `id` int(11) not null auto_increment comment '自增 id',
+  `title` varchar(120) default null collate utf8mb4_general_ci comment '标题',
   `summary` text default null collate utf8mb4_general_ci comment '摘要',
   `content` text collate utf8mb4_general_ci comment '文章内容',
   `thumbnail` varchar(120) default null comment '缩略图',
@@ -15,18 +15,19 @@ create table `post` (
   
   `category_id` int(11) default null comment '分类 id',
   `tag` varchar(80),
-  `status` tinyint(1) default '0' comment '是否发布，0-未发布，1-已发布',
+  `status` tinyint(1) default 0 comment '是否发布，0-未发布，1-已发布',
   `created_at` int(11) default null comment '创建时间',
   `updated_at` int(11) default null comment '更新时间',
+  
   primary key(`id`),
-  index `post_authorId`(`author_id`) using btee,
-  index `poststatus`(`status`) using btree
-) engine=innoDB auto increment=1 default charset=utf8mb4 comment='文章主表';
+  index `post_author_id` (`author_id`) using btree,
+  index `poststatus` (`status`) using btree
+) engine=innoDB default charset=utf8mb4 comment='文章主表';
 
 
 
 -- 2 comment 评论表，评论关联前台用户表，关联评论状态表
-create table `comment`(
+create table if not exists `comment`(
   `id` int(11) not null auto_increment comment '评论自增 id',
   `content` text not null comment '评论内容',
   `status` tinyint(2) not null default '0' comment '1 评论已发布，0 未发布',
@@ -37,25 +38,26 @@ create table `comment`(
   `remind` smallint(4) default '0' comment '0 未提醒，1 已提醒',
   `created_at` int(11) comment '评论创建日期',
   `updated_at` int(11) comment '修改日期',
-  `is_deleted` smallint(2) '是否删除',
+  `is_deleted` smallint(2) comment '是否删除',
   primary key (`id`),
-  index `comment_postId`(`post_id`), index `comment_fansId`(`fans_id`),
-  index `commentstatus`(`status`)
-)engine=myISAM auto_increment=1 default charset=utf8mb4 comment='评论表';
--- )engine=innodb auto_increment=1 default charset=utf8mb4 comment='评论表';
+  index `comment_postId` (`post_id`), 
+  index `comment_fansId` (`fans_id`),
+  index `commentstatus` (`status`)
+)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment='评论表';
 
 
 
 ## 3 前台用户表
-create table `fans`(
-  `id` int(11),
+create table if not exists `fans`(
+  `id` int(11)  not null auto_increment,
   `content` text,
   `status` tinyint(2),
   `create_time` int(11),
   `email` varchar(30),
   `url` varchar(120),
-  `post_id` int(),
-)engine=innodb auto_increment=1 default charset=utf8mb4 comment='前台用户表';
+  `post_id` int(11),
+  primary key(`id`)
+)engine=innoDB default charset=utf8mb4 comment='前台用户表';
 
 
 
@@ -85,35 +87,34 @@ create table if not exists `user`(
 
 
 ## 5 管理员表
-create table `adminuser`(
-  `id` int(11) not null auto_increment comment '',
-  `username` varchar(80) not null collate utf8mb4_general_ci comment '',
-  `nickname` varchar(80) not null collate utf8mb4_general_ci comment '',
-  `password` int(11) comment '',
-  `email` varchar(120) comment '',
-  `avatar` varchar(120) comment '',
-  `level` smallint(2) comment '',
-  `profile` text comment '',
-  `auth_key` varchar(32) comment '',
-  `password_hash` varchar(200) comment '',
-  `password_reset_token` varchar(200) comment '',
+create table if not exists `adminuser`(
+  `id` int(11) not null auto_increment comment '自增 id',
+  `username` varchar(80) not null collate utf8mb4_general_ci comment '用户名',
+  `nickname` varchar(80) not null collate utf8mb4_general_ci comment '昵称',
+  `password` int(11) comment '密码',
+  `email` varchar(120) comment '邮箱',
+  `avatar` varchar(120) comment '头像',
+  `level` smallint(2) comment '级别',
+  `profile` text comment '介绍',
+  `auth_key` varchar(32) comment '用户 key',
+  `password_hash` varchar(200) comment '加密密码',
+  `password_reset_token` varchar(200) comment '重置密码 token',
   primary key(`id`)
-)engine=innodb auto_increment=1 default charset=utf8mb4 comment='管理员表';
-
+)engine=innoDB default charset=utf8mb4 comment='管理员表';
 
 
 ## auth_item
 create table if not exists `auth_item`(
-  `name` varchar(64) not null comment '',
-  `type` init(11) not null comment '',
-  `description` text collate utf8mb4_general_ci comment '',
-  `rule_name` varchar(64) default null comment '',
-  `data` text collate=utf8mb4_general_ci comment '',
+  `name` varchar(64) not null collate utf8mb4_general_ci comment '名字',
+  `type` int(11) not null comment '类型',
+  `description` text comment '描述',
+  `rule_name` varchar(64) default null comment 'rule name',
+  `data` text comment 'data',
   `created_at` int(11) default null,
   `updated_at` int(11) default null,
-  primary key(`name`), // 复合主键
-  index `auth_item_rulename`(`rule_name`), `auth_item_type` (`type`) // 索引
-
+  primary key(`name`), -- 复合主键
+  index `auth_item_rulename`(`rule_name`) using btree,
+  index `auth_item_type` (`type`)  using btree 
 ) engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '作者表';
 
 
@@ -140,59 +141,60 @@ create table if not exists `auth_rule`(
 create table if not exists `auth_assignment`(
   `name` varchar(64) not null collate utf8mb4_general_ci,
   `user_id` varchar(64) not null,
-  `created_at` init(11) default null,
+  `created_at` int(11) default null,
   primary key(`name`, `user_id`)
 )engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '作者角色分配';
 
 
 # 文章分类表
-create table `category` (
+create table if not exists `category` (
   `id` int(11) not null auto_increment comment '自增 id',
   `name` varchar(80) default null comment '分类名称',
-  primary key (`id`)
-  unique key `name`(`cat_name`) using btree
-) engine=innoDB auto increment=1 default charset=utf8mb4 comment='文章分类表';
+  
+  primary key (`id`),
+  unique key `name`(`name`) using btree
+) engine=innoDB default charset=utf8mb4 comment='文章分类表';
 
 
 # 标签表
-create table `tag` (
+create table if not exists `tag` (
   `id` int(11) not null auto_increment comment '自增 id',
-  `name` varchar(40) not null collate utf8mb4_general_ci comment '标签名称',
+  `name` varchar(40) not null comment '标签名称',
   `frequency` int(11) default '1' comment '关联文章数量, 标签出现的频率',
   primary key (`id`),
   unique key `tag_name`(`name`) using btree
-) engine=innoDB auto defaut charset=utf8mb4 collate=utf8mb4_general_ci comment '文章标签表';
+) engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '文章标签表';
 
 
 ## 表的关联, post_tag 文章和标签的关联
-create table `postag`(
-  `id` int(11) not null auto increment comment '自增 id',
+create table if not exists `postag`(
+  `id` int(11) not null auto_increment comment '自增 id',
   `post_id` int(11) default null comment '文章 id',
   `tag_id` int(11) default null comment '标签 id',
   primary key(`id`),
   unique key `post_id`(`post_id`, `tag_id`) using btree
-) engine=innoDB auto increment=1 default charset=utf8mb4 comment='文章和标签的关联';
+) engine=innoDB default charset=utf8mb4 comment='文章和标签的关联';
 
 
 
 ## 表的关联, poststatus 文章状态表
 create table if not exists `poststatus`(
-  `id` int(`11`) not null auto_increment comment '',
-  `name` varchar(40) not null collate utf8mb4_general_ci comment '',
-  `position` int(11) not null comment '',
+  `id` int(`11`) not null auto_increment comment '自增 id',
+  `name` varchar(40) not null collate utf8mb4_general_ci comment 'name',
+  `position` int(11) not null comment 'position',
   primary key(`id`),
   unique key `tag_name`(`name`) using btree
-)engine=innodb default charset=utf8mb4 collate=utf8mb4_general_ci comment='文章状态表';
+)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment='文章状态表';
 
 
 ## 表的关联, commentstatus 评论状态表
-create table `commentstatus`(
-  `id` int(`11`) not null auto_increment comment '',
-  `name` varchar(40) not null collate utf8mb4_general_ci comment '',
-  `position` tinyint(2) not null comment '',
-  unique key `tag_name`(`name`) using btree,
-  primary key(`id`)
-)engine=innodb auto_increment=1 default charset=utf8mb4 comment='评论状态表';
+create table if not exists `commentstatus`(
+  `id` int(`11`) not null auto_increment comment '自增 id',
+  `name` varchar(40) not null collate utf8mb4_general_ci comment '评论 name',
+  `position` tinyint(2) not null comment '是否发表',
+  primary key(`id`),
+  unique key `tag_name`(`name`) using btree
+)engine=innoDB default charset=utf8mb4 comment='评论状态表';
 
 
 
@@ -202,7 +204,7 @@ create table if not exists `migration`(
   `version` varchar(120) not null collate utf8mb4_general_ci,
   `apply_time` int(11) default null,
   primary key(`version`)
-)engine=innodb default charset=utf8mb4 comment='数据搬家用的表';
+)engine=innoDB default charset=utf8mb4 comment='数据搬家用的表';
 
 
 
