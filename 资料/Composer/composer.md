@@ -45,7 +45,7 @@
 ## 安装 Yii
 ```
 安装 composer Asset插件，会自动更新到最新版
-composer global require "fxp/composer-asset-plugin:^1.5.2"
+composer global require "fxp/composer-asset-plugin:^1.4.5"
 
 Yii2 基础版，最后一个是项目文件夹的名字
 php composer.phar create-project yiisoft/yii2-app-basic yiiBasic
@@ -64,4 +64,25 @@ github token
 获取 github token
   https://github.com/settings/tokens
 
+  mac 路径
+  /Users/lulongwen/.composer/auth.json
+
 ```
+
+
+## Yii2 plugins
+```
+  composer require bizley/quill:^2.3
+  composer require "wbraganca/yii2-tagsinput:~1.0.2"
+
+
+```
+
+
+
+
+
+
+
+
+

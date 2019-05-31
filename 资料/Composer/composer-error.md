@@ -43,3 +43,27 @@ php composer.phar create-project yiisoft/yii2-app-advanced advanced
 }
 
 ```
+
+
+## 更新Composer依赖报错处理
+```
+PHP Fatal error:  Declaration of Fxp\Composer\AssetPlugin\Repository\AbstractAssetsRepository::search($query, $mode = 0) must be compatible with Composer\Repository\ComposerRepository::search($query, $mode = 0, $type = NULL) in /Users/lulongwen/.composer/vendor/fxp/composer-asset-plugin/Repository/AbstractAssetsRepository.php on line 334
+
+解决方案：
+到 pkg.phpcomposer.com 搜索 fxp/composer-asset-plugin包 安装最新版
+composer global require "fxp/composer-asset-plugin:^1.4.5"
+
+// 备选
+composer global remove fxp/composer-asset-plugin --no-plugins
+
+```
+
+
+
+
+
+
+
+
+
+

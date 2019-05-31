@@ -57,18 +57,21 @@ hosts 设置
 
 
 
-
 ## 常见错误
 1. You don't have permission to access /blog/ on this server
 ```
-去掉 Virtual hosts 下 include前面的 # 号
+修改 /Application/MAMP /conf/ apache/httpd.conf 
+	1 去掉 Virtual hosts 下 include前面的 # 号，在 575行
+	# Virtual hosts
+	Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf
 
+	2 修改 204行的
 	<Directory />
     Options Indexes FollowSymLinks
     AllowOverride None
 	</Directory>
 
-修改为
+	修改为
 	<Directory />
     Options Indexes FollowSymLinks Includes ExecCGI
     AllowOverride All

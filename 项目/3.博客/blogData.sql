@@ -40,7 +40,7 @@ INSERT INTO `auth_assignment` (`name`, `user_id`, `created_at`) VALUES
 
 
 -- comment 
-INSERT INTO `comment` (`id`, `content`, `status`, `create_time`, `userid`, `email`, `url`, `post_id`, `remind`) VALUES
+INSERT INTO `comment` (`id`, `content`, `status`, `created_at`, `fans_id`, `email`, `url`, `post_id`, `remind`) VALUES
 (null, '假设你想通过 RESTful 风格的 API 来展示用户数据。用户数据被存储在用户DB表， 你已经创建了 yii\\db\\ActiveRecord 类 app\\models\\User 来访问该用户数据.', 2, 1443004317, 1, 'sxb@hotmail.com', '', 41, 1),
 (null, 'yii\\db\\Query::one() 方法只返回查询结果当中的第一条数据， 条件语句中不会加上 LIMIT 1 条件。如果你清楚的知道查询将会只返回一行或几行数据 （例如， 如果你是通过某些主键来查询的），这很好也提倡这样做。但是，如果查询结果 有机会返回大量的数据时，那么你应该显示调用 limit(1) 方法，以改善性能。 例如， (new \\yii\\db\\Query())->from(''user'')->limit(1)->one()。', 2, 1443004455, 1, 'somuchfun@gmail.com', '', 39, 1),
 (null, '传说中的沙发', 2, 1443004561, 1, 'lsf@ggoc.com', '', 34, 1),
@@ -102,13 +102,14 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 
 
 -- post
+-- 字段长度越界 264 - Out of range value for column 'created_at' at row 2,
 INSERT INTO `post` (`id`, `title`, `content`, `tag`, `status`, `created_at`, `updated_at`, `author_id`) VALUES
 (null, 'Yii2小部件详解', '小部件是在视图中使用的可重用单元，使用面向对象方式创建复杂和可配置用户界面单元。\r\n例如，日期选择器小部件可生成一个精致的允许用户选择日期的日期选择器', 'Yii2,小部件,widget', 2, 1442998314, 1474115205, 3),
-(null, 'Yii2安装 ', '使用Composer安装 Yii，只需执行一条简单的命令就可以安装新的扩展或更新 Yii 了一个应用程序的基本骨架','Yii2,视频教程,教程', 2, 1558334670453, 1558334677653, 2);
+(null, 'Yii2安装 ', '使用Composer安装 Yii，只需执行一条简单的命令就可以安装新的扩展或更新 Yii 了一个应用程序的基本骨架','Yii2,视频教程,教程', 2, 1558334670, 1558334677, 2);
 
-INSERT INTO `post` (`id`, `title`, `content`, `tags`, `status`, `create_time`, `update_time`, `author_id`) VALUES
+INSERT INTO `post` (`id`, `title`, `content`, `tag`, `status`, `created_at`, `updated_at`, `author_id`) VALUES
 (null, 'Active Record 详解','AR的生命周期，理解AR的生命周期对于你操作数据库非常重要。生命周期通常都会有些典型的事件存在。对于开发AR的behaviors来说非常有用。</p>\r\n<p>当你li>yii\\db\\ActiveRecord::init(): 会触发一个 yii\\db\\ActiveRecord::EVENT_INIT 事件</li>\r\n</ol><p>当你通过 yii\\db\\ActiveRecord::find() 方法查询数据时，每个AR实例都将有以下生命周期：</p>', 'Yii2,DetailView', 2, 1443001778, 1443001892, 2),
-(null, 'ListView', '<p>yii\\widgets\\ListView 小部件用于显示数据提供者 data provider提供的数据。\r\n每个数据模型用指定的视图文件 yii\\widgets\\ListView:，所以它可以很方便地为最终用户显示信息并同时创建数据管理界面。</p>', 3, 1443002869, 1443002869, 1),
+(null, 'ListView', '<p>yii\\widgets\\ListView 小部件用于显示数据提供者 data provider提供的数据。\r\n每个数据模型用指定的视图文件 yii\\widgets\\ListView:，所以它可以很方便地为最终用户显示信息并同时创建数据管理界面。</p>','widget,ListView', 3, 1443002869, 1443002869, 1),
 (null, 'Yii 教程','请用超清模式播放介绍和教程讲解安排', 'Yii2,视频教程,教程', 2, 1445512144, 1479262717, 1);
 
 
@@ -117,3 +118,6 @@ INSERT INTO `poststatus` (`id`, `name`, `position`) VALUES
 (1, '草稿', 1),
 (2, '已发布', 2),
 (3, '已归档', 3);
+
+
+
