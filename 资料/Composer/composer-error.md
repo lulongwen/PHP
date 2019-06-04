@@ -1,5 +1,20 @@
 # composer Error
 
+```
+minimum-stability改为dev
+	"minimum-stability": "stable",
+
+	全局稳定性设置：通过设置 minimum-stability的值，来告诉 Composer当前项目的依赖要求的包的全局稳定性级别
+	stable 默认值，还有
+	dev、alpha、beta、RC、stable，
+
+	Available options (in order of stability) are dev, alpha, beta, RC, and stable.
+
+```
+
+
+
+
 ## Could not open input file: composer.phar
 ```
 php composer.phar create-project yiisoft/yii2-app-advanced advanced
@@ -45,25 +60,10 @@ php composer.phar create-project yiisoft/yii2-app-advanced advanced
 ```
 
 
-## 更新Composer依赖报错处理
+## 搜索 fxp/composer-asset-plugin包 安装最新版
 ```
-PHP Fatal error:  Declaration of Fxp\Composer\AssetPlugin\Repository\AbstractAssetsRepository::search($query, $mode = 0) must be compatible with Composer\Repository\ComposerRepository::search($query, $mode = 0, $type = NULL) in /Users/lulongwen/.composer/vendor/fxp/composer-asset-plugin/Repository/AbstractAssetsRepository.php on line 334
+Fatal error: Declaration of Fxp\Composer\AssetPlugin\Repository\AbstractAssetsRepository::search($query, $mode = 0) must be compatible with Composer\Repository\ComposerRepository::search($query, $mode= 0, $type = NULL) in C:\Users\win7\AppData\Roaming\Composer\vendor\fxp\composer-asset-plugin\Repository\AbstractAssetsRepository.php on line 334
 
-解决方案：
-到 pkg.phpcomposer.com 搜索 fxp/composer-asset-plugin包 安装最新版
-composer global require "fxp/composer-asset-plugin:^1.4.5"
-
-// 备选
-composer global remove fxp/composer-asset-plugin --no-plugins
+https://packagist.phpcomposer.com
 
 ```
-
-
-
-
-
-
-
-
-
-
