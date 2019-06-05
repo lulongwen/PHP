@@ -21,7 +21,7 @@ create table if not exists `post` (
   
   primary key(`id`),
   index `post_author_id` (`author_id`) using btree,
-  index `poststatus` (`status`) using btree
+  index `post_status` (`status`) using btree
 ) engine=innoDB default charset=utf8mb4 comment='文章主表';
 
 
@@ -31,7 +31,7 @@ create table if not exists `comment`(
   `id` int(11) not null auto_increment comment '评论自增 id',
   `content` text not null comment '评论内容',
   `status` tinyint(2) not null default '0' comment '1 评论已发布，0 未发布',
-  `fans_id` int(11) not null comment '前台用户 id',
+  `fans_id` int(11) not null default '0' comment '前台用户 id',
   `email` varchar(80) comment '邮箱',
   `url` varchar(120) comment '评论链接',
   `post_id` int(2) comment '文章 id',
@@ -42,17 +42,17 @@ create table if not exists `comment`(
   primary key (`id`),
   index `comment_postId` (`post_id`), 
   index `comment_fansId` (`fans_id`),
-  index `commentstatus` (`status`)
+  index `comment_status` (`status`)
 )engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment='评论表';
 
 
 
 ## 3 前台用户表
 create table if not exists `fans`(
-  `id` int(11)  not null auto_increment,
+  `id` int(11) not null auto_increment,
   `content` text,
   `status` tinyint(2),
-  `create_time` int(11),
+  `created_at` int(11),
   `email` varchar(30),
   `url` varchar(120),
   `post_id` int(11),
@@ -120,11 +120,11 @@ create table if not exists `auth_item`(
 
 ## auth_item_child
 create table if not exists `auth_item_child`(
-  `parent` varchar(64) not null comment '',
-  `child` varchar(64) not null comment '',
+  `parent` varchar(64) not null comment '父级',
+  `child` varchar(64) not null comment '子级',
   primary key(`parent`, `child`),
   index `child`(`child`)
-) engine=innoDB default charset=utf8mb4 collate utf8mb4_general_ci comment '';
+) engine=innoDB default charset=utf8mb4 collate utf8mb4_general_ci comment '作者级别';
 
 
 -- auth_rules
@@ -134,7 +134,7 @@ create table if not exists `auth_rule`(
   `created_at` int(11) default null,
   `updated_at` int (11) default null,
   primary key (`name`)
-)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '';
+)engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment '作者规则';
 
 
 ## auth_assignment
@@ -150,7 +150,6 @@ create table if not exists `auth_assignment`(
 create table if not exists `category` (
   `id` int(11) not null auto_increment comment '自增 id',
   `name` varchar(80) default null comment '分类名称',
-  
   primary key (`id`),
   unique key `name`(`name`) using btree
 ) engine=innoDB default charset=utf8mb4 comment='文章分类表';
@@ -177,9 +176,9 @@ create table if not exists `postag`(
 
 
 
-## 表的关联, poststatus 文章状态表
+-- 表的关联, poststatus 文章状态表
 create table if not exists `poststatus`(
-  `id` int(`11`) not null auto_increment comment '自增 id',
+  `id` int(11) not null auto_increment comment '自增 id',
   `name` varchar(40) not null collate utf8mb4_general_ci comment 'name',
   `position` int(11) not null comment 'position',
   primary key(`id`),
@@ -187,9 +186,9 @@ create table if not exists `poststatus`(
 )engine=innoDB default charset=utf8mb4 collate=utf8mb4_general_ci comment='文章状态表';
 
 
-## 表的关联, commentstatus 评论状态表
+-- 表的关联, commentstatus 评论状态表
 create table if not exists `commentstatus`(
-  `id` int(`11`) not null auto_increment comment '自增 id',
+  `id` int(11) not null auto_increment comment '自增 id',
   `name` varchar(40) not null collate utf8mb4_general_ci comment '评论 name',
   `position` tinyint(2) not null comment '是否发表',
   primary key(`id`),
@@ -208,9 +207,15 @@ create table if not exists `migration`(
 
 
 
--- 表的外键约束 auth_assignment
+/**
+ * alter table 需加外键的表 
+ *   add constraint 外键名 foreign key(需加外键表的字段名)
+ *   referencnes 关联表名(关联字段名);
+ *
+ * 表的外键约束 auth_assignment
+ */
 alter table `auth_assignment`
-  add constraint `fk_auth_assignment` foreign key(`item_name`) 
+  add constraint `fk_auth_assignment` foreign key(`name`) 
   references `auth_item`(`name`) 
     on delete cascade on update cascade;
 
@@ -232,11 +237,17 @@ alter table `auth_item_child`
     on delete cascade on update cascade;
 
 
--- post fk_ 外键的前缀
+/**
+ * alter table 需加外键的表 
+ *   add constraint 外键名 foreign key(需加外键表的字段名)
+ *   referencnes 关联表名(关联字段名);
+ *
+ * post fk_ 外键的前缀，mysql 外键与自增 id的矛盾
+ */
 alter table `post`
   add constraint `fk_post_author` foreign key(`author_id`)
   references `adminuser`(`id`)
-    on delete cascade,
+    on delete cascade, -- Error
   add constraint `fk_post_status` foreign key(`status`)
   references `poststatus`(`id`)
     on delete cascade;
@@ -246,17 +257,20 @@ alter table `post`
 alter table `comment`
   add constraint `fk_comment_post` foreign key(`post_id`) 
   references `post`(`id`)
-    on delete cascade,
+    on delete cascade, -- Error
   add constraint `fk_comment_status` foreign key(`status`)
   references `commentstatus`(`id`)
     on delete cascade,
-  add constraint `fk_comment_user` foreign key(`user_id`)
-  references `user`(`id`)
+  add constraint `fk_comment_fans` foreign key(`fans_id`)
+  references `fans`(`id`)
     on delete cascade;
 
 
-# 修改表的自增字段
--- alter table `comment` modify `id` int(11) not null auto_increment, auto_increment = 99;
+
+/** 修改表的自增字段
+ alter table `comment` 
+  modify `id` int(11) not null auto_increment, auto_increment = 99;
+ */
 
 
 
