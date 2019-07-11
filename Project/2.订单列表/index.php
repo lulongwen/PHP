@@ -24,7 +24,7 @@
 
 
   // 3 发送 sql语句 limit 放在最后
-  $sql = "SELECT * FROM list
+  $sql = "SELECT * FROM pms_product
   ORDER BY id desc
   LIMIT $offset, $pagesize";
 

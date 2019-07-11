@@ -25,6 +25,9 @@
   ### PHP Email
   ### GD库
 
+* PHP知识点参考
+  https://www.zhihu.com/question/26635323/answer/33812516
+
 
 ## PHP高级
 * PHP的重心还是要放在业务处理上

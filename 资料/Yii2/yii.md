@@ -16,6 +16,16 @@
 ```
 
 
+
+## Yii使用细节
+
+```
+  官方下载的源码中是缺失配置文件和index.php，需要执行 init
+  windows 直接点击 根目录下的 init.bat
+  或 php init
+```
+
+
 ## 主流PHP框架对比
 1. TP 不太规范
 2. CI 方法太长，规范性好

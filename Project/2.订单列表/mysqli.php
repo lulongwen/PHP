@@ -4,7 +4,7 @@
 define('host', 'localhost');
 define('user', 'root');
 define('pwd', 'root');
-define('dbName', 'order');
+define('dbName', 'pms');
 define('port', 3306);
 
 // 1 实例化一个 Mysqi 对象
