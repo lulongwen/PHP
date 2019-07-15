@@ -16,6 +16,27 @@
 ```
 
 
+## Yii2 核心知识点
+* DetailView
+* GridView
+* ListView
+* DataProvider
+* PostSearch
+
+### DetailView
+
+### GridView
+  * table 表格展示
+  * 展示多条数据的列表
+
+### ListView
+  * 自定义显示内容
+  * 更加灵活地设置数据展示的格式
+
+### PostSearch
+  * 搜索类
+
+
 
 ## Yii使用细节
 

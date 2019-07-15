@@ -1,6 +1,6 @@
 
 <?php
-    header('content-type:text/html; charset=utf-8');
+  header('content-type:text/html; charset=utf-8');
 /* PHP 运算符
 
    三元运算符
@@ -30,10 +30,15 @@
 
     $arr = array('baidu' => '百度', 'sohu' => '搜狐');
         echo $arr['baidu'];
-   
 
 
+  $a = 'ok';
 
+  $a = $a ? $a : 1; // a ? b: c, $a $a为true,返回 $a, 否则返回 1
+
+  $a = $a ?: 1; // $a为true，返回 $a 否则返回 1，上面的简写
+
+  $a = $a ?? 1; // 等价于 ?:, 区别 当  $a未定义时，?: 会报一个 未定义变量 的 notice错误级别
     
 
 

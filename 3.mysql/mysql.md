@@ -19,6 +19,14 @@
 ```
 
 
+## 数据库分析
+```
+Dedecms 数据库结构分析
+  http://help.dedecms.com/develop/2011/0627/141.html
+
+```
+
+
 
 ## 1. [创建数据库 database.sql](1.创建数据库/database.sql)
   字符集，排序规则
