@@ -15,8 +15,14 @@
 <header> ListView </header>
 
 <!-- 视图文件中使用ListView来展示数据了 -->
+
 <?= ListView::widget([
-	'dataProvider' => $dataProvider, //数据提供器
+  'id' => 'postList',
+  'dataProvider' => $dataProvider, //数据提供器
+  'layout' => '{items}<div class="col-lg-12 sum-pager">{summary}{pager}</div>',
+	'itemOptions' => [
+		'class' => 'col-lg-3'
+	],
   'itemView' => '_listItem', //指定item视图（该视图文件与当前视图在同一个目录下)
   'options' => [
 		'tag' => 'div',
@@ -25,10 +31,6 @@
 	'viewParams' => [ // 传参数给每一个 item
 		'moodCfg' => Mood::getAll()
   ],
-	'layout' => '{items}<div class="col-lg-12 sum-pager">{summary}{pager}</div>',
-	'itemOptions' => [
-		'class' => 'col-lg-3'
-	],
 	
 	'pager' => [
     'options' => ['class' => 'pagination pull-right'],
