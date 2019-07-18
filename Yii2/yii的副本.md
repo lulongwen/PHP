@@ -1,0 +1,202 @@
+# Yii2
+* 性能稳定，开发速度快， 安全性号，可扩展性
+* 入门容易，精通不易，很多大型企业喜欢用 Yii
+* 学习目标：构建面向企业的 SaaS
+  * 包括团队管理，用户权限
+  * 通过Stripe计费，构建支付系统
+
+```
+composer create-project yiisoft/yii2-app-advanced Shop
+
+```
+
+
+## Yii 组件
+```$xslt
+	layouts
+	
+	ActiveForm 
+		form actoin 默认的是当前控制器的名称
+	
+	Validate 表单验证
+	rules() & attributeLabels()
+	
+	Url::to() 路由链接
+	
+	Html::submitButton() input 表单组件
+	
+	Pagination([]); 分页组件
+```
+
+
+## Yii 资源
+```
+  https://github.com/forecho/awesome-yii2
+
+  图片上传
+  https://www.yii-china.com/post/detail/15.html
+
+form
+https://www.cnblogs.com/chrdai/p/8005492.html
+
+composer 问题参考
+https://www.jianshu.com/p/fd13c26a9404
+
+twbs4
+https://github.com/yiisoft/yii2-bootstrap4
+
+```
+
+
+## 主流PHP框架对比
+1. TP 不太规范
+2. CI 方法太长，规范性好
+3. larvel 方法太多，学习成本高
+
+
+## 为啥要自己开发框架
+1. 为了更高的运行效率
+2. 为了更快的开发效率
+3. 为了证明自己技能
+
+
+## 开发中的想法
+- 一个功能就是一个控制器
+- 学一个知识点，要知道这个知识点是解决什么问题的
+
+- YII 2.0 advanced版本要求
+    + PHP5.4以上
+
+## layouts
+- renderPartial 只显示内容，不显示头部尾部
+    return $this->renderPartial();
+    
+    ```
+    public $layout = 'my'; 自定义 layouts
+    
+    <?= $content ?>  自定义 layouts显示内容
+    ```
+
+
+
+  
+## Yii优点
+* Gii蛮不错的，简化了开发流程，可以生成绝大数的代码，开发后台效率高
+  相似的代码可以自动生成，保持风格的统一性
+* Yii的源码可读性好,运行速度比laravel快
+* Active Record非常好用，特别是Gii 生成的model有注释，
+  可以在Phpstorm下自动提示，可以避免很多小错误
+* 提供了很多工具，涵盖
+  * 从搭建脚手架
+  * 开发调试
+  * 单元测试
+  * 功能测试
+  * 验收测试
+  * 性能调优
+
+* 如果想要高性能，Yii + workerman, Yii + Swoole性能翻10倍
+* Yii2完成一个电商+ERP的项目
+  * Yii2的开发效率非常高，尤其是ActiveRecord
+
+* 架构为你屏蔽了大量细节,让你不用关心
+  SQL注入,Xss, Csrf
+  设置 cookie和session，也能写出优雅的代码
+
+* 通过面对相同的问题，思考个人实践方案和框架的思路的区别和优劣
+
+  
+
+## 缺点：前后端完全的分离的趋势下，yii2前后端的耦合的还是有些重了
+* 有点重，不轻量，不过他本身就是重量级框架
+* 对于框架的选择要看具体的情况而定
+  开发最核心的地方在于解决问题的能力，框架只是一个辅助吧，
+  核心在于架构。所以框架的选择适合具体情况就行
+    * 你选择了哪个，哪个就是你的未来。
+
+
+
+## 对比 Laravel
+* laravel的强项是理念先进，yii本身也借鉴了很多laravel的理念
+* 优雅，框架结构组织清晰，抽象了中间件，任务，服务等模块
+* 提供的 artisan开发工具开发效率高，社区活跃完善
+  * 提供了简化的轻量级框架 Lumen
+* 社区比较活跃，资源比较丰富，一些第三方的工具都有封装，比如支付等
+* 终端控制台略强一点
+  自带queue，Kernel中的cron调度比较好用
+  每次上线不用再去改crontab。
+
+* 路由比较灵活，但是一方面如果不制定规范，查问题的时候先要去routes文件中看看对应关系，有利有弊
+
+* laravel缺点：貌似代码有些过于优雅丧失了一些性能
+
+
+
+## Yii模块化开发
+* 把项目划分为一个个模块
+* 模块要有配置文件，配置文件里面要有开启和关闭功能
+
+扩展性
+  模块化
+  时间机制
+  mixin混入
+  依赖注入
+
+延迟加载
+  类的延迟加载
+  类的映射表机制
+  组件的延迟加载
+
+数据缓存
+  数据缓存的增删改查
+  缓存的有效期
+  缓存中的依赖关系
+页面缓存
+片段缓存
+  片段缓存的设置 & 嵌套
+
+http缓存到浏览器
+  http缓存设置 & 缓冲时机
+  lastmodified
+  etag
+  缓存实例
+
+
+
+## Gii
+```
+index.php?r=gii 为啥不报错
+  yii框架用了模块化的思想进行设计
+  yii有很多模块，gii 是其中的一个模块，模块都是挂在在应用主体之上的 $app
+  写了 r=gii 后，应用主体会进行处理，会判断 英文单词是 模块还是控制器
+  如果是模块，会直接调用模块进行处理
+  如果是个控制器，才会交给应用主体 $app去查找对应的控制器进行处理
+    每个模块都是 MVC结构
+
+  数据库发生改变，增加了字段，如何用 gii来修改代码
+
+```
+
+
+## 场景
+* 场景一般在表单模型 model里面创建 
+```
+  yii2-scenario场景的使用讲解
+
+  Model类的load和validate两个方法，分别用来收集和校验客户端数据。
+  哪些数据应该被收集，哪些数据需要在什么场景下验证，场景(scenario)和验证规则(rule)。
+
+  $model->isNewRecord;
+
+  关键点是批量赋值（massive assignment）和数据校验（validate）两个方法。
+  如果对不同的场景指定赋值字段和检验规则，问题就迎刃而解。
+
+  业务复杂时定义多个场景，仔细为每个场景定义安全属性和校验规则
+```
+
+
+## HTMLpurfile
+* 开发人员应该记住的准则：客户端的输入都是不可信
+  * 客户端传过来的数据 先进行过滤和清洗后 再存储或传递到内部系统
+
+
+
