@@ -18,3 +18,63 @@
 
 
 * PostSearch 是Yii搜索功能的范本, 研究透了，就对搜索很熟练了
+
+
+
+## Layouts
+* render
+* renderPartial 只显示内容，不显示头部尾部
+```
+  public $layout = 'my'; 自定义 layouts
+  <?= $content ?>  自定义 layouts显示内容
+
+  return $this-> render('index', ['model' => $model]);
+
+  return $this->renderPartial(['list', ['model' => $model]]);
+```
+
+
+## Html::submitButton();
+
+
+
+## Pagination([]); 分页组件
+
+
+
+## Url::to(); 路由链接
+
+
+## Validate 表单验证
+* rules() & attributeLabels()
+
+
+### rules()
+
+
+### attributeLabels()
+
+
+
+## ActiveForm()
+* actoin 默认的是当前控制器的名称
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
