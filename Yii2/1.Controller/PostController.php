@@ -5,6 +5,10 @@
   controllers 存放 Controller 的目录
 
   业务逻辑代码都放在 Model里面处理，不要放在 Controller 里面
+
+引用 Controller
+  引用的规则： 命名空间 + 类名
+  Controller 在哪里, vendor/yiisoft/yii2/web/Controller
 */
 
 namespace app\controllers;

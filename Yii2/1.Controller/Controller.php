@@ -10,6 +10,7 @@
 namespace app\controllers;
 
 use app\models\Post;
+
 use yii\web\Controller;
 use yii\web\Cookie;
 
@@ -43,6 +44,8 @@ class PostController extends Controller {
 
       return 是必须的，不然不会返回视图， index 是调用的视图文件， data 是注入到视图里面的数据
     */
+
+    $data = ['name' => 'lucy', 'title' => 'ceo'];
     return $this-> render('index', ['model' => $model]);
     return $this-> renderPartial('index', $data);
   }

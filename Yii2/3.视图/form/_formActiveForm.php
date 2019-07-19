@@ -1,4 +1,5 @@
 <?php
+  use yii\widgets\ActiveForm;
 
 /*
   文本框:textInput()
@@ -18,12 +19,10 @@
 */
 
   $edu = ['1'=>'大学','2'=>'高中','3'=>'初中'];
-
   $hobby = ['0'=>'篮球','1'=>'足球','2'=>'羽毛球','3'=>'乒乓球'];
 ?>
 
 <?php $form = ActiveForm::begin() ?>
-
 <?php ActiveForm::end() ?>
 
 
@@ -46,6 +45,9 @@
 
 
   <?= $form -> field($model, 'hobby') -> checkboxList($hobby) ?>
+
+  <?= $form-> field($model, 'category')
+      -> dropDownList(['1' => '前端', '2' => '后端'], ['prompt' => '请选择分类']); ?>
 
 
   <?= $form -> field($model, 'file') -> fileInput() ?>
