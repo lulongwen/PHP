@@ -21,6 +21,24 @@
     'con_afternoon',
     'con_night',
     'note',
+    'title' => [
+      'attribute' => 'title',
+      'format' => 'raw',
+      'value' => function($model) {
+        // 跳转前台页面
+        return '<a href="http://www.blog.com'. Url::to(['post/detail', 'id' => $model-> id]) .'">
+        '. $model->title  .'</a>';
+      }
+    ],
+    
+    'status' => [
+      'label' => '状态', 
+      'attribute' => 'status',
+      'value' => function($model) {
+        return ($model-> status == 1) ? '有效' : '无效';
+      },
+      'filter' => ['0' => '无效', '1' => '有效'],
+    ],
 
     // 显示查看、编辑、删除等按钮（默认）
     ['class' => 'yii\grid\ActionColumn'],
