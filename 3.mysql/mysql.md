@@ -24,6 +24,9 @@
 Dedecms 数据库结构分析
   http://help.dedecms.com/develop/2011/0627/141.html
 
+姜成尧 mysql DBA视频课程
+http://www.52download.cn/wpcourse/archives/2113
+
 ```
 
 

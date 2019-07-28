@@ -1,0 +1,38 @@
+安装
+
+tar jxvf xunsearch-full-1.4.9.tar.bz2
+cd xunsearch-full-1.4.9
+./setup.sh
+
+
+管理
+bin/xs-ctl.sh start
+bin/xs-ctl.sh stop
+bin/xs-ctl.sh restart
+bin/xs-ctl.sh reload
+
+
+导入数据源 并 建立索引
+
+检测搜索代码
+php util/SearchSkel.php -p goods -o /usr/local/apache/htdocs
+
+创建索引数据源的SQL:
+select goods_id, name, description, status, g.sort_number, b.title brand_title, concat(mainc.category_title, ',', group_concat(extc.category_title)) category_title from kang_goods g left join kang_brand b using(brand_id) left join kang_category mainc using(category_id) left join kang_category_goods cg using(goods_id) left join kang_category extc on cg.category_id=extc.category_id group by g.goods_id;
+
+// 临时表
+drop table if exists search;
+create table search (
+    goods_id int unsigned,
+    name varchar(255),
+    description text,
+    status tinyint,
+    sort_number int,
+    brand_title varchar(255),
+    category_title varchar(255)
+) charset=utf8;
+
+insert into search select goods_id, name, description, status, g.sort_number, b.title brand_title, concat(mainc.category_title, ',', group_concat(extc.category_title)) category_title from kang_goods g left join kang_brand b using(brand_id) left join kang_category mainc using(category_id) left join kang_category_goods cg using(goods_id) left join kang_category extc on cg.category_id=extc.category_id group by g.goods_id;
+
+php sdk/php/util/Indexer.php --clean --project=goods 
+php sdk/php/util/Indexer.php --rebuild --project=goods  --source=mysql://root:hellokang@192.168.48.1:3306/shop5 --sql="select goods_id, name, description, status, g.sort_number, b.title brand_title, concat(mainc.category_title, ',', group_concat(extc.category_title)) category_title from kang_goods g left join kang_brand b using(brand_id) left join kang_category mainc using(category_id) left join kang_category_goods cg using(goods_id) left join kang_category extc on cg.category_id=extc.category_id group by g.goods_id"

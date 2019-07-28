@@ -1,12 +1,43 @@
 # 文件夹
 node_modules
-
-PHP技术点
 Book
+
+
+# composer vendor dir
+vendor
+
+# phpunit itself is not needed
+phpunit.phar
+
+# local phpunit config
+phpunit.xml
+
+# test
+tests/_output/*
+tests/_support/_generated
+
+
+# composer itself is not needed
+composer.phar
+
+
+# netbeans project files
+nbproject
+
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
 
 # local env files
 .env.local
 .env.*.local
+
 
 # Log files 日志文件
 npm-debug.log*
@@ -14,10 +45,17 @@ yarn-debug.log*
 yarn-error.log*
 
 
-# Editor directories and files 根目录和文件
+# Mac DS_Store Files
 .DS_Store
+
+# phpstorm project files
 .idea
 .vscode
+.sass-cache
+
+#vagrant folder
+/.vagrant
+
 *.suo
 *.ntvs*
 *.njsproj
