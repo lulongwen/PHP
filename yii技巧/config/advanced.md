@@ -1,5 +1,28 @@
 # Yii Advanced 细节
 
+
+## composer 安装 高级模版
+
+```bash
+# 更新 composer
+	composer self-update
+
+# 安装 yii模版
+	composer create-project --prefer-dist yiisoft/yii2-app-advanced yiiBlog
+
+# 进入目录，初始化
+	cd yiiBlog
+	./ php init
+
+	[0] Development 开发环境
+	[1] Production 生成环境
+	选择需要的环境 0 或 1 开始生成, 输入 yes , 就开生成了
+```
+
+
+
+
+
 ## Advanced关闭 debug 设置 dev & prod
 * index.php配置 YII_ENV
 
@@ -19,7 +42,15 @@
     prod：生产环境。常量 YII_ENV_PROD 为 true
     dev：开发环境。常量 YII_ENV_DEV  为 true
     test：测试环境。常量 YII_ENV_TEST  为 true
+
 ```
+
+* 生产环境跟开发环境的区别
+	* 开发环境 backend/web 和 fronend/web 都多个 index-test.php 测试文件
+	* 开发环境 index.php 文件默认开启 debug
+	* 开发环境 config/main-local.php 文件下加载debug 和 gii 模块
+	* 生产环境 都没有这些文件
+
 
 * 配置debug开启/关闭
 ```PHP

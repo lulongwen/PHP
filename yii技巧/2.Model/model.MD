@@ -1,6 +1,11 @@
 # Model
-
 * yii\base\Model 作为模型基类
+
+* Model 模型是存放 models 目录中的
+* 命名规则的话一般是首字母大写, 
+* Model 层一般继承 2 个类
+	* 一个是\yii\db\ActiveRecord
+	* 一个是\yii\base\Model
 
 * Controller 的代码都是很简单的，
 * 所有任务都让 Model去做，然后调动 view
@@ -12,6 +17,30 @@
 
 * 业务逻辑放到 Form里面 PostForm
   * 比如 backend\models\PostForm.php
+
+
+
+## Model 和 ActiveRecord 区别
+
+```
+ActiveRecord 是直接关联的数据库的表，并需要 tableName()进行关联, 
+而 Model 并不直 接关联数据表，字段由自己定义。
+
+ActiveRecord 相对 Model 也集成了需要直接查询的函数等。 
+	例如我们数据库有个文章表，我们会选择 ActiveRecord 继承，
+	而当用户登录验证只需要username,password 时，我们可以选择 Model 继承
+
+
+```
+
+
+## $model 设置默认值
+```php
+  1 先在控制器中设置 $model->items = 'a';
+  2 视图中
+  <?= $form-> field($model, 'items')->checkboxList(['a' => 'Item A', 'b' => 'Item B']);?>
+
+```
 
 
 

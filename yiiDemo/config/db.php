@@ -1,8 +1,8 @@
 <?php
 
-  return [
+return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=blog',
+    'dsn' => 'mysql:host=localhost;dbname=yiidemo',
     'username' => 'root',
     'password' => 'root',
     'charset' => 'utf8',
@@ -12,4 +12,4 @@
     //'enableSchemaCache' => true,
     //'schemaCacheDuration' => 60,
     //'schemaCache' => 'cache',
-  ];
+];

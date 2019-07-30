@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\forms;
 
 use Yii;
 use yii\base\Model;
@@ -11,6 +11,7 @@ use yii\base\Model;
  * @property User|null $user This property is read-only.
  *
  */
+// 不关联数据库，自定义属性和方法
 class LoginForm extends Model
 {
     public $username;
