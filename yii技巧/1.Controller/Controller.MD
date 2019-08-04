@@ -1,15 +1,21 @@
 # Controller
-* Yii2 的控制器是放在 controllers 里面, 
+* Yii2 的控制器是放在 controllers 里面, 是 MVC结构中的 C部分
 * 命名规则是(名称 + Controller.php), 例如 TestController.php
 * 所有的 controller 都是继承 \yii\web\Controller.php
 
-* yii\web\Controller 作为控制器的基类
-* 用 yii\base\Action 作为操作类的基类
+* yii\web\Controller 作为控制器的基类，用 yii\base\Action 作为操作类的基类
+* Controller 负责处理请求和生成响应，具体来说：
+  * 从 模型对象 Model里面拿到需要的数据
+  * 然后调用视图模板来渲染这些数据，最后生成输出响应信息
 
+* 控制器有动作组成，动作是控制器类中的方法，一个动作对应一个页面
+  * 比如 actionUpdate 对应 view/update.php
+  
 * 控制器和动作的驼峰命名会被转换成小写字母， 
 * 其中每个单词由一个专有的连字号分隔，例如，CamelCaseController 将为 camel-case
 
 * 当你在写控制器操作的代码时， 应该返回 return要渲染的内容而不是输出 echo它
+
 ```php
 public function actionView($id)
 {

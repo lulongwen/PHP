@@ -11,16 +11,28 @@
 ```
 
 
-## urlManager 需要 .htaccess 文件配合
+## URL美化
+
+* 把冗厂的URL美化成有意义的地址
+* 更新内容比较频繁的列表最好采用伪静态的方式
+* Yii伪静态 urlManager 需要 .htaccess 文件配合
+
 ```php
 'urlManager' => [
+  // 1 开启 URL美化，去掉 index.php?r=
   'enablePrettyUrl'=>true,
+  // 如果开启脚本名，会显示 index.php
   'showScriptName'=>false,
+  // 添加 .html 后缀，实现伪静态
   'suffix'=>'.html',
   'rules'=>[
-    '<controller:\w+>/<id:\d+>'=>'<controller>/index',
+    // '<controller:\w+>/<id:\d+>'=>'<controller>/index',
+    // 文章详细页面的美化规则
+    '<controller:\w+>/<id:\d+>'=>'<controller>/detail',
     '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
     '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+    // 文章列表页的 美化规则
+    'posts' => 'post/index'
   ]
 ]
 

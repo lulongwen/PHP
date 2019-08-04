@@ -1,14 +1,37 @@
 # view 视图
 
-* 视图对象为 yii\web\View 的实例
-* 视图内的特殊变量 $this  $this 不再指向当前控制器或小部件， 而是指向视图对象
+* 视图是 MVC模式中的 View部分
+* 视图对象为 yii\web\View 的实例，依据视图模板文件，进行构造和渲染页面
+  * 习惯上称视图模板文件为 视图
+  * 视图模板文件有 HTML代码和 php代码组成
+
+* 视图文件路径，默认放在 @app/views/ControolerID目录下
+  * 例如 PostController 对应的视图文件为 /views/post/
+
+* 视图内的特殊变量 $this
+  * $this 不再指向当前控制器或小部件， 而是指向视图对象，应用组件的实例
+  * $this 负责管理和渲染视图模板文件
+
+* 布局 layouts，是特殊的视图，代表多个视图的公共部分
+  * <?= $content ?>
+  * $content就是控制器渲染出来的结果，每个页面都不相同
+  * 默认放在 @app/views/layouts/ 目录下
 
 ````php
-渲染一个局部视图，使用 $this->render()
+
+  渲染一个局部视图，使用 $this->render()
 
   $this->renderPartial() 独立的页面
   render() 现在只返回渲染结果，而不是直接显示它，所以现在你必须显式地把它 echo 出来。像这样：
   echo $this->render('_item', ['item' => $item]);
+
+
+替换布局
+  public $layout = 'mytemplate';
+
+禁用默认layouts
+  $this-> layouts = false;
+
   
 ```
 

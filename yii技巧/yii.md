@@ -1,55 +1,44 @@
-# Yii2
+# Yii2 关键概念
 
-1. Controller
-2. Model
-3. View
+1. Controller 控制器
+2. Model 模型
+  * ActiveRecord 活动记录
+  * Model
+  * Gii可以生成 模型，控制器，表单，增删查改的功能的代码
+
+3. View 视图
 
 4. Widget 小部件
 5. Active Filters 动作过滤器
 6. Form 表单栏
 
+7. Caching 缓存
+8. Security 安全
+9. HandingRequest 请求
+10. Helpers 助手类
 
+```php
 
-## 安装 Yii
-```
-YII2 PHP版本，要求PHP5.4 以上
+  Yii 全局的类
+  Yii::$app-> request   请求处理
+  Yii::$app-> response  响应处理
+    $app 应用主体
+    request 请求组件
+    <?= Yii::$app->homeUrl ?> 首页
+    
+    
+  ActiveRecord 活动记录，关联数据库的字段
 
-  composer create-project yiisoft/yii2-app-advanced Shop
+  session 既可以是对象，也可以是数组，为啥？
+  因为 session继承了 ArrayAccess Interface
   
-  官方下载的源码中是缺失配置文件和index.php，需要执行 init
-  windows 直接点击 根目录下的 init.bat
-  或 php init
+  /views/layouts/main.php 模板设置
 
+  frontend & backend & common/config/main.php 配置
 
-上线虚拟主机配置
-  https://www.yiichina.com/doc/guide/2.0/tutorial-shared-hosting
-本地服务器配置
-  https://www.yiichina.com/doc/guide/2.0/start-installation
-  
-```
-
-
-## Yii 资源
-```
-  https://github.com/forecho/awesome-yii2
-
-图片上传
-  https://www.yii-china.com/post/detail/15.html
-  
-form
-  https://www.cnblogs.com/chrdai/p/8005492.html
-  
-composer 问题参考
-  https://www.jianshu.com/p/fd13c26a9404
-
-twbs4
-  https://github.com/yiisoft/yii2-bootstrap4
-
-
-一个域名管理前后台
-  https://blog.csdn.net/qq_31648761/article/details/54949272
 
 ```
+
 
 
 ## PHP 开发中的想法
@@ -63,42 +52,24 @@ twbs4
 * 通过面对相同的问题，思考个人实践方案和框架的思路的区别和优劣
 
 
-## Yii2 核心知识点
-* DetailView
-* GridView
-* ListView
+
+## Yii2 Widgets 小部件
+
+* 数据小部件，可以用于显示数据
+
+* DetailView 显示一条记录数据
+  * 一个 Model模型类对象的数据
+  * ActiveRecord类的实例对象，键值对构成的一个关联数组
+
+* GridView 使用 table表格来显示数据， 展示多条数据的列表
+  * 配置 model, attribute, template, options 属性，就可以创建一个 DetailView
+
+* ListView 自定义显示HTML内容， 更加灵活地设置数据展示的格式
+  * ListView 和 GridView 能够用于显示一个拥有分页，排序，过滤功能的列表或表格
+
 * DataProvider
-* PostSearch
+* PostSearch 搜索类
 
-### DetailView
-
-### GridView
-  * table 表格展示
-  * 展示多条数据的列表
-
-### ListView
-  * 自定义显示内容
-  * 更加灵活地设置数据展示的格式
-
-### PostSearch
-  * 搜索类
-
-
-## Gii
-```
-index.php?r=gii 为啥不报错
-  yii框架用了模块化的思想进行设计
-  yii有很多模块，gii 是其中的一个模块，模块都是挂在在应用主体之上的 $app
-  写了 r=gii 后，应用主体会进行处理，会判断 英文单词是 模块还是控制器
-  如果是模块，会直接调用模块进行处理
-  如果是个控制器，才会交给应用主体 $app去查找对应的控制器进行处理
-    每个模块都是 MVC结构
-
-
-数据库发生改变，增加了字段，如何用 gii来修改代码
-  重新用Gii生成代码，绿色是新增的代码，红色是原来的代码
-  一定不要覆盖，直接 diff 复制绿色的代码到编辑器中
-```
 
 
 ## Yii模块化开发
@@ -106,11 +77,13 @@ index.php?r=gii 为啥不报错
 * 模块要有配置文件，配置文件里面要有开启和关闭功能
 
 
+
 ### 扩展性
   模块化
   时间机制
   mixin混入
   依赖注入
+
 
 
 ### 延迟加载
