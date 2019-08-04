@@ -85,8 +85,101 @@ class TestController extends \yii\web\Controller
   }
   
   
+
+  
   public function actionRequest()
   {
+    $request = Yii::$app-> request;
+
+    // 获取get id参数，如果没有，后面的是默认参数
+    $request-> get('id', 3);
+
+    // 获取 post参数，后面的是默认值
+    $request-> post('name', 'ok');
+
+
+    // 判断是 get/post请求
+    $request-> isGet;
+    $request-> isPost;
+
+    // 获取 IP
+    $request-> userIp;
+
+
     return $this -> render('update');
+  }
+
+
+  // response 响应处理
+  public function actionResponse()
+  {
+    $response = Yii::$app-> response;
+
+    // 设置状态码
+    $response-> statusCode = '403';
+
+
+    // 设置相应的 headers, 不缓存
+    $response-> headers-> add('pragma', 'no-cache');
+    // 缓存时间5秒，清除缓存
+    $response-> headers-> set('pragma', 'max-age=5');
+    $response-> headers-> remove('pragma');
+
+
+    // 302 跳转
+    $response-> headers-> add('location', 'https://www.lulongwen.com');
+    $this-> redirect('https://www.lulongwen.com');
+
+
+    // 文件下载
+    $response-> headers-> add();
+    $response-> headers-> add('content-disposition', 'attachment; filename="ok.jpg"');
+    $response-> sendFile('./ok.jpg');
+  }
+
+
+
+  // session
+  public function actionSession()
+  {
+    $session = Yii::$app -> session;
+    
+    $session -> open();
+    if ($sesssion -> isActive) {
+      // 是否开启 session
+      echo 'session is open';
+    }
+
+
+    // 获取 session
+    $session -> get('user');
+
+    // 设置 session
+    $session -> set('user', 'lucy');
+    // 数组设置 session
+    $session['user'] = 'lucy';
+    echo $session['user'];
+
+
+    // 删除 session
+    $session -> remove('user');
+    unset($session['user']);
+  }
+
+
+
+  // Cookie, request请求获取 cookie，cookie在浏览器里面是加密的
+  // 加密的方法在 /config/web.php里面的
+  // 通过 cookieValidationKey 对 cookie加密
+  public function actionCookie() {
+    $cookie = Yii::$app -> response -> cookies;
+
+    $cookieData = array('name' => 'lucy', 'value' => 300);
+    $cookie -> add(new Cookie($cookieData));
+    $cookie -> remove('name');
+
+    // 如果没有 cookie，第二个就是默认值
+    // request请求获取 cookie
+    $cookieName = Yii::$app -> request -> cookies -> getValue('name', 'lucy');
   }
 }

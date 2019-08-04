@@ -3,7 +3,7 @@
 1. Controller 控制器
 2. Model 模型
   * ActiveRecord 活动记录
-  * Model
+  * Model，Model首字母要大写
   * Gii可以生成 模型，控制器，表单，增删查改的功能的代码
 
 3. View 视图
@@ -20,6 +20,9 @@
 ```php
 
   Yii 全局的类
+  Yii::$app 应用主体
+    yii 每个文件都要有命名空间
+
   Yii::$app-> request   请求处理
   Yii::$app-> response  响应处理
     $app 应用主体
@@ -28,6 +31,10 @@
     
     
   ActiveRecord 活动记录，关联数据库的字段
+  
+  class Post extends ActiveRecord {}
+  class LoginForm extends Model {}
+
 
   session 既可以是对象，也可以是数组，为啥？
   因为 session继承了 ArrayAccess Interface

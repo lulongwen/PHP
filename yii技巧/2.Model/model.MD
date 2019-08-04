@@ -1,8 +1,7 @@
 # Model
 * yii\base\Model 作为模型基类
 
-* Model 模型是存放 models 目录中的
-* 命名规则的话一般是首字母大写, 
+* Model 模型是存放 models 目录中的，命名规则的话一般是首字母大写
 * Model 层一般继承 2 个类
 	* 一个是\yii\db\ActiveRecord
 	* 一个是\yii\base\Model

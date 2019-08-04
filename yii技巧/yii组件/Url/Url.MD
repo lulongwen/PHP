@@ -2,6 +2,7 @@
 
 * 支持可选参数了，比如，如果你在 2.0 中定义了一个下面这样的规则，
 * 那么它可以同时匹配 post/popular 和 post/1/popular 两种 URL
+
 ```php
   [
     'pattern' => 'post/<page:\d+>/<tag>',
@@ -16,6 +17,7 @@
 * 把冗厂的URL美化成有意义的地址
 * 更新内容比较频繁的列表最好采用伪静态的方式
 * Yii伪静态 urlManager 需要 .htaccess 文件配合
+* htaccess 的 Rewrite可以实现 URL美化，但是千万不要这么做，用 UrlManager来实现
 
 ```php
 'urlManager' => [
@@ -41,6 +43,9 @@
 
 
 ## Url组件
+
+* 尽量不要使用字符串拼接来生成 url
+* 要用 Url::to 或 Url:create() 来生成 URL
 
 ```php
 use yii\helpers\Url;
